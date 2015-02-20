@@ -17,6 +17,12 @@ function preload() {
 var score = 0
     , scoreText;
 
+var accumulator = {};
+
+accumulator["someProperty"] = 23;
+
+console.dir (accumulator);
+
 function create() {
     game.physics.startSystem(Phaser.Physics.arcade);
     game.add.sprite(0, 0, 'sky');
