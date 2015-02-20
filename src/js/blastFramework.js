@@ -20,6 +20,8 @@ var blastFramework = (function () {
         console.log("hello world!");
     }
 
+    /******************** Start of AI2 Blocks ********************/
+
     function initTextBox(jsonData) {
         var target = "_accumulator.game"
             , id = jsonData.id || null
@@ -30,6 +32,38 @@ var blastFramework = (function () {
         return code;
 
     }
+
+    function loadResource(jsonData) {
+        var target = "_accumulator.game"
+            , id = jsonData.id || null
+            , filepath = jsonData.filepath || null
+            , loaderType = jsonData.loaderType || null
+            , params = jsonData.params || null;
+        //TODO: Debug this
+        var code = target + '.load.' + loaderType + '(\'' + id + '\',' + '\'' + filepath + '\'';
+        if (params) {
+            code += ',' + params.toString();
+        }
+        code += '); ';
+        return code;
+    }
+
+    function addSprite(jsonData) {
+        var target = "_accumulator.game"
+            , resource = jsonData.resource || null
+            , text = jsonData.text || null
+            , x = jsonData.x || 0
+            , y = jsonData.y || 0
+            , params = jsonData.params || '';
+
+        var code = target + '.add.sprite(' + x + ',' + y + ',\'' + resource + '\');';
+        return code;
+
+    }
+
+
+
+    /******************** End of AI2 Blocks ********************/
 
     function createGame() {
         console.debug('Creating game..');
@@ -44,6 +78,10 @@ var blastFramework = (function () {
         var blockName = jsonData.block;
         if (blockName == 'InitTextBox') {
             return initTextBox(jsonData);
+        } else if (blockName == 'LoadResource') {
+            return loadResource(jsonData);
+        } else if (blockName == 'AddSprite') {
+            return addSprite(jsonData);
         }
 
         /** No blocks **/
@@ -56,7 +94,6 @@ var blastFramework = (function () {
             /** <-- insert things to do before here --> **/
             oldFunc.apply(this, arguments);
             /** <-- inpsert things to do after here --> **/
-            //TODO: scoping error here
             var codeSnippet = _generateCodeSnippet(jsonData);
             console.debug('@' + jsonData.handler + ' Snippet added: ' + codeSnippet);
             eval(codeSnippet);
@@ -73,6 +110,27 @@ var blastFramework = (function () {
 })();
 
 console.log(blastFramework.sayHello());
+blastFramework.appendCode({
+    id: 'sky',
+    handler: 'preload',
+    block: 'LoadResource',
+    loaderType: 'image',
+    filepath : 'img/assets/sky.png'
+});
+blastFramework.appendCode({
+    id: 'dude',
+    handler: 'preload',
+    block: 'LoadResource',
+    loaderType: 'spritesheet',
+    filepath : 'img/assets/dude.png'
+});
+blastFramework.appendCode({
+    resource: 'sky',
+    handler: 'create',
+    block: 'AddSprite',
+    x: 0,
+    y: 0
+});
 blastFramework.appendCode({
     handler: 'create',
     block: 'InitTextBox',
