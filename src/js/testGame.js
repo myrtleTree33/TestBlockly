@@ -35,31 +35,43 @@ function create() {
 
     // create ground
     var ground = platforms.create(0, game.world.height - 64, 'ground');
-    ground.scale.setTo(2, 2);
+    ground.scale.setTo(10, 10);
     ground.body.immovable = true;
 
+    crates = game.add.group();
+    crates.enableBody = true;
+
+    for (var i = 0; i < 10; i++) {
+        var crate = crates.create(200 + 400 * Math.random(),50,'star');
+        crate.body.gravity.y = 20;
+        crate.body.bounce.y = 0.7 + Math.random() * 0.2;
+        crate.outOfBoundsKill = true;
+        crate.body.collideWorldBounds = true;
+
+    }
     //create ledge
     var ledge = platforms.create(400, 400, 'ground');
-    ledge.body.immovable = true;
 
+    ledge.body.immovable = true;
     ledge = platforms.create(-150, 250, 'ground');
+
     ledge.body.immovable = true;
-
     player = game.add.sprite(32, game.world.height - 150, 'dude');
-    game.physics.arcade.enable(player);
 
+    game.physics.arcade.enable(player);
     player.body.bounce.y = 0.2;
+
     player.body.gravity.y = 300;
     player.body.collideWorldBounds = true;
-
     player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
 
+    player.animations.add('right', [5, 6, 7, 8], 10, true);
     cursors = game.input.keyboard.createCursorKeys();
 
     stars = game.add.group();
 
     stars.enableBody = true;
+
 
     for (var i = 0; i < 12; i++) {
         var star = stars.create(i * 70, 0, 'star');
@@ -75,14 +87,17 @@ function update() {
         star.kill();
         score += 10;
         scoreText.text = 'Score: ' + score;
+        console.log('killed star');
     }
 
+    game.physics.arcade.collide(crates, platforms);
+    game.physics.arcade.collide(crates, player);
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(stars, platforms);
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
-    player.body.velocity.x = 0;
 
+    player.body.velocity.x = 0;
     if (cursors.left.isDown) {
         // move left
         player.body.velocity.x = -150;
