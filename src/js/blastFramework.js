@@ -30,6 +30,12 @@ var Blast = (function () {
         onCreate: function () {
         },
         onUpdate: function () {
+            // dequeue if there are items
+            while(_pq.length != 0) {
+                var code = _pq.shift();
+                console.debug('@once' + ' Snippet>>>' + code);
+                eval(code);
+            }
         }
     };
 
@@ -39,7 +45,6 @@ var Blast = (function () {
      * @private
      */
     var _generateCodeSnippet = function (command, opts) {
-        //TODO: Stub
         if (!(command in _blocks)) {
             console.error('No such block=' + command);
             return '';
@@ -68,6 +73,11 @@ var Blast = (function () {
         };
     };
 
+    var _injectCodeOnce = function (command, opts) {
+        var codeSnippet = _generateCodeSnippet(command, opts);
+        _pq.push(codeSnippet);
+    };
+
     /************** Public Variables *********************/
 
     /**
@@ -86,7 +96,7 @@ var Blast = (function () {
         _game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
             preload: _callbacks.preload,
             create: _callbacks.onCreate,
-            update: _callbacks.update
+            update: _callbacks.onUpdate
         });
     }
 
@@ -97,11 +107,13 @@ var Blast = (function () {
      * @param opts
      */
     var appendCode = function (target, command, opts) {
-        if (!(target in this._callbacks)) {
+        if (target == 'once') {
+            _injectCodeOnce(command, opts);
+        } else if (!(target in this._callbacks)) {
             console.error('Invalid code block: ' + 'Target=' + target + ' Command=' + command);
-            return;
+        } else {
+            _injectCode(target, command, opts);
         }
-        _injectCode(target, command, opts);
     }
 
     Blast.prototype = {

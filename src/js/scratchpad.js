@@ -4,7 +4,7 @@
 
 'use strict';
 
-blast.appendCode('onCreate', 'log', {
+blast.appendCode('once', 'log', {
     message: 'hello world!'
 });
 blast.generateGame();
