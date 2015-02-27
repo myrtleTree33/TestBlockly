@@ -11,6 +11,7 @@ function preload() {
     game.load.image('sky', 'img/assets/sky.png');
     game.load.image('ground', 'img/assets/platform.png');
     game.load.image('star', 'img/assets/star.png');
+    game.load.image('firstaid', 'img/assets/firstaid.png');
     game.load.spritesheet('dude', 'img/assets/dude.png', 32, 48);
 }
 /** Globals **/
@@ -42,7 +43,7 @@ function create() {
     crates.enableBody = true;
 
     for (var i = 0; i < 10; i++) {
-        var crate = crates.create(200 + 400 * Math.random(),50,'star');
+        var crate = crates.create(200 + 400 * Math.random(),50 * Math.random(),'firstaid');
         crate.body.gravity.y = 20;
         crate.body.bounce.y = 0.7 + Math.random() * 0.2;
         crate.outOfBoundsKill = true;

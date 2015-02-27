@@ -39,6 +39,49 @@ var Blast = (function () {
         }
     };
 
+    var registerObject = function(name, obj) {
+        var _name = name || '';
+        var _obj = obj;
+        if (_name == '') {
+            console.error('Error when registering object.  No name=' + name);
+            return false;
+        }
+        if (_name in _accumulator) {
+            console.error('Error when registering object.  Duplicate name=' + _name);
+            return false;
+        }
+        if (!_obj) {
+            console.error('Oops.  Error when registering object.  No data.');
+            return false;
+        }
+        console.debug('Registering object=' + _name);
+        _accumulator[_name] = _obj;
+        return true;
+    }
+
+    var deregisterObject = function(name) {
+        var _name = name || '';
+        if (_name == '') {
+            console.error('Error when deregistering object.  No name specified');
+            return false;
+        }
+        if (!(_name in _accumulator)) {
+            console.error('Error when deregistering object.  No name exists=' + _name);
+            return false;
+        }
+
+        var obj = _accumulator[_name];
+        if ('kill' in obj) {
+            console.debug('Activating kill() routine found in name=' + _name);
+            obj.kill();
+        }
+        // deregister objects and tell garbage collector
+        delete _accumulator[_name];
+        obj = _accumulator[_name] = null;
+        console.debug('Deregistered object name=' + _name);
+
+    }
+
     /**
      * Generates a code snippet, based on blocks.
      * @returns {string}
@@ -125,11 +168,13 @@ var Blast = (function () {
         sprite: sprite,
         _game: _game,
         _callbacks: _callbacks,
-
+        registerObject: registerObject,
+        deregisterObject: deregisterObject,
         generateGame: generateGame,
         appendCode: appendCode
     };
     return Blast;
 })();
 
-var blast = new Blast();
+
+var $blast = new Blast();

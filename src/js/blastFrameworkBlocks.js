@@ -14,5 +14,14 @@ __blocks.log = function (opts) {
 };
 
 
+__blocks.CreateSimpleSprite = function (opts) {
+    var name = opts.name || '';
+    var code = 'var sprite = $blast.sprite.generators.SimpleSprite(\'' + name + '\').init();\n';
+    code += '$blast.deregisterObject(\'' + name + '\');';
+    return code;
+
+};
+
+
 
 

@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "blockly": "https://github.com/google/blockly.git",
-    "phaser": "~2.2.2"
+    "phaser": "~2.2.2",
+    "lodash": "~3.3.1"
   }
 }

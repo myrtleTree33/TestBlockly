@@ -4,9 +4,13 @@
 
 'use strict';
 
-blast.appendCode('once', 'log', {
+
+$blast.appendCode('once', 'log', {
     message: 'hello world!'
 });
-blast.generateGame();
+$blast.appendCode('once', 'CreateSimpleSprite', {
+    name: 'testBlock'
+});
+$blast.generateGame();
 
 
