@@ -24,14 +24,29 @@ var Blast = (function () {
     /** Used to inject and execute code **/
     var _pq = [];
     var _game = null;
+    var _groups = null;
     var _callbacks = {
         onPreload: function () {
+            _game.load.image('sky', 'img/assets/sky.png');
+            _game.load.image('ground', 'img/assets/platform.png');
+            _game.load.image('star', 'img/assets/star.png');
+            _game.load.image('firstaid', 'img/assets/firstaid.png');
+            _game.load.spritesheet('dude', 'img/assets/dude.png', 32, 48);
+
+            /** Create groups **/
+            _groups.terrain = _game.add.group();
+            _groups.powerups = _game.add.group();
+            _groups.destructibles = _game.add.group();
+            _groups.player = _game.add.group();
+            _groups.enemy1 = _game.add.group();
+            _groups.enemy2 = _game.add.group();
+            _groups.enemy3 = _game.add.group();
         },
         onCreate: function () {
         },
         onUpdate: function () {
             // dequeue if there are items
-            while(_pq.length != 0) {
+            while (_pq.length != 0) {
                 var code = _pq.shift();
                 console.debug('@once' + ' Snippet>>>' + code);
                 eval(code);
@@ -39,7 +54,7 @@ var Blast = (function () {
         }
     };
 
-    var registerObject = function(name, obj) {
+    var registerObject = function (name, obj) {
         var _name = name || '';
         var _obj = obj;
         if (_name == '') {
@@ -59,7 +74,7 @@ var Blast = (function () {
         return true;
     }
 
-    var deregisterObject = function(name) {
+    var deregisterObject = function (name) {
         var _name = name || '';
         if (_name == '') {
             console.error('Error when deregistering object.  No name specified');
