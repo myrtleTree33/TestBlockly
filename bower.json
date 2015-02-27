@@ -27,6 +27,7 @@
   "dependencies": {
     "blockly": "https://github.com/google/blockly.git",
     "phaser": "~2.2.2",
-    "lodash": "~3.3.1"
+    "lodash": "~3.3.1",
+    "node-uuid": "~1.4.2"
   }
 }

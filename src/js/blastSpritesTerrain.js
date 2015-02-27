@@ -13,15 +13,20 @@ __generators.SimpleSprite = function(name) {
     var _scope = undefined;
 
     var _kill = function() {
-        console.debug('Kill routine for name=' + name + ' called.');
+        console.debug('Kill routine for name=' + _scope.name + ' called.');
         delete this;
     }
 
     var _init = function(scope) {
         _scope = scope;
-        _scope.name = name;
-        $blast.registerObject(name, _scope);
-        console.debug('SimpleSprite=' + name + ' created');
+        if (!name) {
+            _scope.name = uuid.v4();
+            console.debug('No name found.  Generating unique name=' + _scope.name);
+        } else {
+            _scope.name = name;
+        }
+        $blast.registerObject(_scope.name, _scope);
+        console.debug('SimpleSprite=' + _scope.name + ' created');
     }
 
     /**

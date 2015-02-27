@@ -11,6 +11,10 @@ $blast.appendCode('once', 'log', {
 $blast.appendCode('once', 'CreateSimpleSprite', {
     name: 'testBlock'
 });
+$blast.appendCode('once', 'DeleteSprite', {
+    name: 'testBlock'
+});
+$blast.appendCode('once', 'CreateSimpleSprite');
 $blast.generateGame();
 
 
