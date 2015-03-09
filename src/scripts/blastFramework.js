@@ -24,23 +24,27 @@ var Blast = (function () {
     /** Used to inject and execute code **/
     var _pq = [];
     var _game = null;
-    var _groups = null;
+    var _groups = {};
     var _callbacks = {
         onPreload: function () {
-            _game.load.image('sky', 'img/assets/sky.png');
-            _game.load.image('ground', 'img/assets/platform.png');
-            _game.load.image('star', 'img/assets/star.png');
-            _game.load.image('firstaid', 'img/assets/firstaid.png');
-            _game.load.spritesheet('dude', 'img/assets/dude.png', 32, 48);
+
+            var __ = $blast;
+
+            __._game.load.image('sky', 'images/assets/sky.png');
+            __._game.load.image('ground', 'images/assets/platform.png');
+            __._game.load.image('star', 'images/assets/star.png');
+            __._game.load.image('firstaid', 'images/assets/firstaid.png');
+            __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
 
             /** Create groups **/
-            _groups.terrain = _game.add.group();
-            _groups.powerups = _game.add.group();
-            _groups.destructibles = _game.add.group();
-            _groups.player = _game.add.group();
-            _groups.enemy1 = _game.add.group();
-            _groups.enemy2 = _game.add.group();
-            _groups.enemy3 = _game.add.group();
+            __._groups.terrain = __._game.add.group();
+            __._groups.powerups = __._game.add.group();
+            __._groups.destructibles = __._game.add.group();
+            __._groups.player = __._game.add.group();
+            __._groups.enemy1 = __._game.add.group();
+            __._groups.enemy2 = __._game.add.group();
+            __._groups.enemy3 = __._game.add.group();
+
         },
         onCreate: function () {
         },
@@ -151,12 +155,14 @@ var Blast = (function () {
      */
     var generateGame = function () {
         console.debug('Creating game..');
-        _game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
-            preload: _callbacks.preload,
-            create: _callbacks.onCreate,
-            update: _callbacks.onUpdate
+        var __ = this;
+        this._game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
+            preload: __._callbacks.onPreload,
+            create: __._callbacks.onCreate,
+            update: __._callbacks.onUpdate
         });
-    }
+        console.log(this._game);
+    };
 
     /**
      * Public API to append a custom code block.
@@ -182,6 +188,7 @@ var Blast = (function () {
         _blocks: _blocks,
         sprite: sprite,
         _game: _game,
+        _groups: _groups,
         _callbacks: _callbacks,
         registerObject: registerObject,
         deregisterObject: deregisterObject,
@@ -197,3 +204,4 @@ window.$blast = new Blast();
 window.__generators = Blast.prototype.sprite.generators; // extending sprite generators
 window.__blocks = Blast.prototype._blocks;
 window.__groups = $blast._groups;
+window.__game = $blast._game;

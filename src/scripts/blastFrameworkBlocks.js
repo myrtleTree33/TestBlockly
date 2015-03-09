@@ -25,6 +25,22 @@ __blocks.CreateSimpleSprite = function (opts) {
 };
 
 
+__blocks.CreateExtendedSprite = function (opts) {
+    var opts = opts || {};
+    var name = opts.name || '';
+    var code = 'var sprite = $blast.sprite.generators.b(\'' + name + '\').init();\n';
+    return code;
+};
+
+
+__blocks.CreateSky = function (opts) {
+    var opts = opts || {};
+    var name = opts.name || '';
+    var code = 'var sprite = $blast.sprite.generators.sky(\'' + name + '\').init();\n';
+    return code;
+};
+
+
 __blocks.DeleteSprite = function (opts) {
     var name = opts.name || '';
     var code = '$blast.deregisterObject(\'' + name + '\');';

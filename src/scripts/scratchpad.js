@@ -14,6 +14,12 @@ $blast.appendCode('once', 'log', {
 $blast.appendCode('once', 'CreateSimpleSprite', {
     name: 'testBlock'
 });
+$blast.appendCode('once', 'CreateExtendedSprite', {
+    name: 'coolSprite'
+});
+$blast.appendCode('onCreate', 'CreateSky', {
+    name: 'sky'
+});
 $blast.appendCode('once', 'DeleteSprite', {
     name: 'testBlock'
 });

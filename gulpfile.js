@@ -36,7 +36,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('images', function() {
-  return gulp.src('./src/images/*')
+  return gulp.src('./src/images/**/*')
     .pipe($.imagemin({
       progressive: true
     }))
