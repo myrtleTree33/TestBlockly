@@ -117,7 +117,6 @@ __generators.platform = function (x,y) {
     var init = function () {
         nativeObject._init(this);
 
-        console.log('PLATFORM:' + $blast._groups.terrain);
         var ledge = $blast._groups.terrain.create(x, y, 'ground');
         ledge.body.immovable = true;
         console.log(ledge);
@@ -134,6 +133,29 @@ __generators.platform = function (x,y) {
     });
 };
 
+
+__generators.rock = function (x,y, gravity) {
+    var nativeObject = __generators.SimpleSprite();
+
+    var init = function () {
+        nativeObject._init(this);
+        var rock = $blast._groups.destructibles.create(x, y, 'firstaid');
+        rock.body.gravity.y = gravity;
+        rock.body.bounce.y = 0.7 + Math.random() * 0.2;
+        rock.outOfBoundsKill = true;
+        rock.body.collideWorldBounds = true;
+        console.log("Init rock at x=" + x + ',' + y);
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+};
 
 __generators.a = function () {
     console.log('extended!!');

@@ -36,29 +36,35 @@ var Blast = (function () {
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
 
+        },
+        onCreate: function () {
+            var __ = $blast;
+            __._game.physics.startSystem(Phaser.Physics.arcade);
+
             /** Create groups **/
             __._groups.background = __._game.add.group();
             __._groups.terrain = __._game.add.group();
             __._groups.terrain.enableBody = true;
             __._groups.powerups = __._game.add.group();
             __._groups.destructibles = __._game.add.group();
+            __._groups.destructibles.enableBody = true;
             __._groups.player = __._game.add.group();
             __._groups.enemy1 = __._game.add.group();
             __._groups.enemy2 = __._game.add.group();
             __._groups.enemy3 = __._game.add.group();
-
-        },
-        onCreate: function () {
-            var __ = $blast;
-            __._game.physics.startSystem(Phaser.Physics.arcade);
         },
         onUpdate: function () {
+            var __ = $blast;
+
             // dequeue if there are items
             while (_pq.length != 0) {
                 var code = _pq.shift();
                 console.debug('@once' + ' Snippet>>>' + code);
                 eval(code);
             }
+
+            // collision detection
+            __._game.physics.arcade.collide(__._groups.terrain, __._groups.destructibles);
         }
     };
 

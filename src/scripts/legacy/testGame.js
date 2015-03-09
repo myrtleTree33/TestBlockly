@@ -91,7 +91,7 @@ function update() {
         console.log('killed star');
     }
 
-    game.physics.arcade.collide(crates, platforms);
+    //game.physics.arcade.collide(crates, platforms);
     game.physics.arcade.collide(crates, player);
     game.physics.arcade.collide(player, platforms);
     game.physics.arcade.collide(stars, platforms);

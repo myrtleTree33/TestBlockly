@@ -20,13 +20,18 @@ $blast.appendCode('once', 'CreateExtendedSprite', {
 $blast.appendCode('onCreate', 'CreateSky', {
     name: 'sky'
 });
+$blast.appendCode('onCreate', 'CreateRock', {
+    x: 50,
+    y:0
+});
 $blast.appendCode('onCreate', 'CreatePlatform', {
     x: 400,
     y:400
 });
 $blast.appendCode('onCreate', 'CreatePlatform', {
     x: 0,
-    y:150
+    y:150,
+    gravity: 70
 });
 $blast.appendCode('once', 'DeleteSprite', {
     name: 'testBlock'
