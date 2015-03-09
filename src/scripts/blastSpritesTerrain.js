@@ -119,8 +119,8 @@ __generators.platform = function (x,y) {
 
         var ledge = $blast._groups.terrain.create(x, y, 'ground');
         ledge.body.immovable = true;
-        console.log(ledge);
-        console.log("Init platform at x=" + x + ',' + y);
+        console.debug(ledge);
+        console.debug("Init platform at x=" + x + ',' + y);
     };
 
     var kill = function () {
@@ -144,7 +144,7 @@ __generators.rock = function (x,y, gravity) {
         rock.body.bounce.y = 0.7 + Math.random() * 0.2;
         rock.outOfBoundsKill = true;
         rock.body.collideWorldBounds = true;
-        console.log("Init rock at x=" + x + ',' + y);
+        console.debug("Init rock at x=" + x + ',' + y);
     };
 
     var kill = function () {
