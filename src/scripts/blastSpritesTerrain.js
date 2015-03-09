@@ -91,19 +91,37 @@ __generators.b = function (name) {
 };
 
 
-/**
- * This is an example of an extended object
- * @param name
- * @returns {*}
- */
 __generators.sky = function (name) {
     var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
         nativeObject._init(this);
-        $blast._game.add.sprite(0,0,'sky');
-        console.log($blast._game);
-        console.log("Init sky.");
+        var sky = $blast._groups.background.create(0, 0, 'sky');
+        console.debug("Init sky.");
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+};
+
+
+__generators.platform = function (x,y) {
+    var nativeObject = __generators.SimpleSprite();
+
+    var init = function () {
+        nativeObject._init(this);
+
+        console.log('PLATFORM:' + $blast._groups.terrain);
+        var ledge = $blast._groups.terrain.create(x, y, 'ground');
+        ledge.body.immovable = true;
+        console.log(ledge);
+        console.log("Init platform at x=" + x + ',' + y);
     };
 
     var kill = function () {

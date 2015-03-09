@@ -41,6 +41,15 @@ __blocks.CreateSky = function (opts) {
 };
 
 
+__blocks.CreatePlatform = function (opts) {
+    var opts = opts || {};
+    var x = opts.x || 0;
+    var y = opts.y || 0;
+    var code = 'var sprite = $blast.sprite.generators.platform(' + x + ',' + y + ').init();\n';
+    return code;
+};
+
+
 __blocks.DeleteSprite = function (opts) {
     var name = opts.name || '';
     var code = '$blast.deregisterObject(\'' + name + '\');';

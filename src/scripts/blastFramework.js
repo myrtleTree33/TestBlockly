@@ -37,7 +37,9 @@ var Blast = (function () {
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
 
             /** Create groups **/
+            __._groups.background = __._game.add.group();
             __._groups.terrain = __._game.add.group();
+            __._groups.terrain.enableBody = true;
             __._groups.powerups = __._game.add.group();
             __._groups.destructibles = __._game.add.group();
             __._groups.player = __._game.add.group();
@@ -47,6 +49,8 @@ var Blast = (function () {
 
         },
         onCreate: function () {
+            var __ = $blast;
+            __._game.physics.startSystem(Phaser.Physics.arcade);
         },
         onUpdate: function () {
             // dequeue if there are items
