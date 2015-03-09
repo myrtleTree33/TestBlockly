@@ -41,7 +41,12 @@ gulp.task('images', function() {
       progressive: true
     }))
     .pipe(gulp.dest('./dist/images'))
-})
+});
+
+gulp.task('phaser', function() {
+    return gulp.src('./src/scripts/vendor/phaser/build/phaser.min.js')
+        .pipe(gulp.dest('./dist/scripts'))
+});
 
 gulp.task('templates', function() {
   return gulp.src('src/*.jade')
@@ -52,7 +57,7 @@ gulp.task('templates', function() {
     .pipe( gulp.dest('dist/') )
 });
 
-gulp.task('build', ['compass', 'js', 'templates', 'images']);
+gulp.task('build', ['compass', 'js', 'templates', 'images', 'phaser']);
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/*.scss',['compass', reload]);

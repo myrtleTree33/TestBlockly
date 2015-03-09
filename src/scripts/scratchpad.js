@@ -24,6 +24,10 @@ $blast.appendCode('onCreate', 'CreatePlatform', {
     x: 400,
     y:400
 });
+$blast.appendCode('onCreate', 'CreatePlatform', {
+    x: 0,
+    y:150
+});
 $blast.appendCode('once', 'DeleteSprite', {
     name: 'testBlock'
 });
