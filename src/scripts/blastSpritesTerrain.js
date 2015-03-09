@@ -6,7 +6,9 @@
 
 
 require("./blastFramework");
-var uuid = require("./vendor/node-uuid");
+
+var uuid = require("./vendor/node-uuid")
+    , _ = require("./vendor/lodash/lodash.min");
 
 //var Blast = Blast || {}; // blast library
 //var $blast = $blast || new Blast(); // instance of blast
@@ -59,6 +61,9 @@ __generators.SimpleSprite = function(name) {
         kill: kill
     }
 }
+
+
+
 
 
 __generators.a = function () {

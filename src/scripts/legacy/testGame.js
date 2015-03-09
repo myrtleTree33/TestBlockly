@@ -8,11 +8,11 @@
 var game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {preload: preload, create: create, update: update});
 
 function preload() {
-    game.load.image('sky', 'img/assets/sky.png');
-    game.load.image('ground', 'img/assets/platform.png');
-    game.load.image('star', 'img/assets/star.png');
-    game.load.image('firstaid', 'img/assets/firstaid.png');
-    game.load.spritesheet('dude', 'img/assets/dude.png', 32, 48);
+    game.load.image('sky', 'images/assets/sky.png');
+    game.load.image('ground', 'images/assets/platform.png');
+    game.load.image('star', 'images/assets/star.png');
+    game.load.image('firstaid', 'images/assets/firstaid.png');
+    game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
 }
 /** Globals **/
 var score = 0
