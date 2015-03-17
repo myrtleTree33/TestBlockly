@@ -9,11 +9,16 @@ require("./blastSpritesTerrain");
 require("./blastFrameworkBlocks");
 require("./expose");
 
-api.Echo('hello world!');
-api.CreateSky();
-api.CreatePlatform(0, 150);
-api.CreateRock(50,0,70);
-api.GenerateGame();
+Android.setGameLoadedFlag();
+
+console.log("[ BLAST framework loaded ]");
+
+
+//api.Echo('hello world!');
+//api.CreateSky();
+//api.CreatePlatform(0, 150);
+//api.CreateRock(50,0,70);
+//api.GenerateGame();
 
 //$blast.appendCode('once', 'log', {
 //    message: 'hello world!'
