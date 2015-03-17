@@ -16,7 +16,7 @@ __blocks.log = function (opts) {
 };
 
 
-__blocks.CreateSimpleSprite = function (opts) {
+__blocks.createSimpleSprite = function (opts) {
     var opts = opts || {};
     var name = opts.name || '';
     var code = 'var sprite = $blast.sprite.generators.SimpleSprite(\'' + name + '\').init();\n';
@@ -25,7 +25,7 @@ __blocks.CreateSimpleSprite = function (opts) {
 };
 
 
-__blocks.CreateExtendedSprite = function (opts) {
+__blocks.createExtendedSprite = function (opts) {
     var opts = opts || {};
     var name = opts.name || '';
     var code = 'var sprite = $blast.sprite.generators.b(\'' + name + '\').init();\n';
@@ -33,7 +33,7 @@ __blocks.CreateExtendedSprite = function (opts) {
 };
 
 
-__blocks.CreateSky = function (opts) {
+__blocks.createSky = function (opts) {
     var opts = opts || {};
     var name = opts.name || '';
     var code = 'var sprite = $blast.sprite.generators.sky(\'' + name + '\').init();\n';
@@ -41,7 +41,7 @@ __blocks.CreateSky = function (opts) {
 };
 
 
-__blocks.CreatePlatform = function (opts) {
+__blocks.createPlatform = function (opts) {
     var opts = opts || {};
     var x = opts.x || 0;
     var y = opts.y || 0;
@@ -50,7 +50,7 @@ __blocks.CreatePlatform = function (opts) {
 };
 
 
-__blocks.CreateRock = function (opts) {
+__blocks.createRock = function (opts) {
     var opts = opts || {};
     var x = opts.x || 0;
     var y = opts.y || 0;
@@ -60,7 +60,7 @@ __blocks.CreateRock = function (opts) {
     return code;
 };
 
-__blocks.DeleteSprite = function (opts) {
+__blocks.deleteSprite = function (opts) {
     var name = opts.name || '';
     var code = '$blast.deregisterObject(\'' + name + '\');';
     return code;

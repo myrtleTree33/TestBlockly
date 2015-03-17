@@ -7,36 +7,52 @@
 require("./blastFramework");
 require("./blastSpritesTerrain");
 require("./blastFrameworkBlocks");
+require("./expose");
 
-$blast.appendCode('once', 'log', {
-    message: 'hello world!'
-});
-$blast.appendCode('once', 'CreateSimpleSprite', {
-    name: 'testBlock'
-});
-$blast.appendCode('once', 'CreateExtendedSprite', {
-    name: 'coolSprite'
-});
-$blast.appendCode('onCreate', 'CreateSky', {
-    name: 'sky'
-});
-$blast.appendCode('onCreate', 'CreateRock', {
-    x: 50,
-    y:0
-});
-$blast.appendCode('onCreate', 'CreatePlatform', {
-    x: 400,
-    y:400
-});
-$blast.appendCode('onCreate', 'CreatePlatform', {
-    x: 0,
-    y:150,
-    gravity: 70
-});
-$blast.appendCode('once', 'DeleteSprite', {
-    name: 'testBlock'
-});
-$blast.appendCode('once', 'CreateSimpleSprite');
-$blast.generateGame();
+api.Echo('hello world!');
+api.CreateSky();
+api.CreatePlatform(0, 150);
+api.CreateRock(50,0,70);
+api.GenerateGame();
+
+//$blast.appendCode('once', 'log', {
+//    message: 'hello world!'
+//});
+//$blast.appendCode('once', 'createSimpleSprite', {
+//    name: 'testBlock'
+//});
+//$blast.appendCode('once', 'createExtendedSprite', {
+//    name: 'coolSprite'
+//});
+//$blast.appendCode('onCreate', 'createSky', {
+//    name: 'sky'
+//});
+//$blast.appendCode('onCreate', 'createRock', {
+//    x: 50,
+//    y:0,
+//    gravity: 70
+//});
+//$blast.appendCode('onCreate', 'createRock', {
+//    x: 420,
+//    y:0
+//});
+//$blast.appendCode('onCreate', 'createPlatform', {
+//    x: 400,
+//    y:400
+//});
+//$blast.appendCode('onCreate', 'createPlatform', {
+//    x: 200,
+//    y:300
+//});
+//$blast.appendCode('onCreate', 'createPlatform', {
+//    x: 0,
+//    y:150,
+//    gravity: 70
+//});
+//$blast.appendCode('once', 'deleteSprite', {
+//    name: 'testBlock'
+//});
+//$blast.appendCode('once', 'createSimpleSprite');
+//$blast.generateGame();
 
 

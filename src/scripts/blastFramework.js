@@ -30,6 +30,10 @@ var Blast = (function () {
 
             var __ = $blast;
 
+            ///** Use http://joeltong.org/phaser to load images **/
+            //__._game.load.baseURL = "http://joeltong.org/phaser/";
+
+            /** For testing **/
             __._game.load.image('sky', 'images/assets/sky.png');
             __._game.load.image('ground', 'images/assets/platform.png');
             __._game.load.image('star', 'images/assets/star.png');
@@ -166,12 +170,13 @@ var Blast = (function () {
     var generateGame = function () {
         console.debug('Creating game..');
         var __ = this;
-        this._game = new Phaser.Game(800, 600, Phaser.CANVAS, '', {
+        this._game = new Phaser.Game("100%", "100%", Phaser.CANVAS, '', {
             preload: __._callbacks.onPreload,
             create: __._callbacks.onCreate,
             update: __._callbacks.onUpdate
         });
         console.log(this._game);
+        __._game.scale.startFullScreen();
     };
 
     /**
