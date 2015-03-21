@@ -37,8 +37,12 @@ var Blast = (function () {
             __._game.load.image('sky', 'images/assets/sky.png');
             __._game.load.image('ground', 'images/assets/platform.png');
             __._game.load.image('star', 'images/assets/star.png');
+            __._game.load.image('diamond', 'images/assets/diamond.png');
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
+
+            /** From Kenny images **/
+            __._game.load.image('tree35', 'images/assets/tree35.png');
 
         },
         onCreate: function () {
@@ -68,9 +72,17 @@ var Blast = (function () {
             }
 
             // collision detection
-            __._game.physics.arcade.collide(__._groups.terrain, __._groups.destructibles);
+            __._game.physics.arcade.collide(__._groups.terrain, __._groups.destructibles, _collisionManager);
+            __._game.physics.arcade.collide(__._groups.terrain, __._groups.terrain);
         }
     };
+
+
+    var _collisionManager = function(obj1, obj2) {
+        console.log('Received collision!');
+        console.log(obj1);
+    }
+
 
     var registerObject = function (name, obj) {
         var _name = name || '';
@@ -88,6 +100,9 @@ var Blast = (function () {
             return false;
         }
         console.debug('Registering object=' + _name);
+
+        console.log(_obj);
+
         _accumulator[_name] = _obj;
         return true;
     }
@@ -205,6 +220,7 @@ var Blast = (function () {
         _game: _game,
         _groups: _groups,
         _callbacks: _callbacks,
+        _collisionManager: _collisionManager,
         registerObject: registerObject,
         deregisterObject: deregisterObject,
         generateGame: generateGame,

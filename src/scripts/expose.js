@@ -41,6 +41,26 @@ api.prototype.CreateRock = function (x, y, gravity) {
 };
 
 
+api.prototype.CreateTree = function (x, y, gravity) {
+    $blast.appendCode('onCreate', 'createTree', {
+        x: x,
+        y: y,
+        gravity: gravity
+    });
+};
+
+
+api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel) {
+    $blast.appendCode('onCreate', 'createBullet', {
+        x: x,
+        y: y,
+        gravity: gravity,
+        xVel: xVel,
+        yVel: yVel
+    });
+};
+
+
 api.prototype.GenerateGame = function () {
     $blast.generateGame();
 }

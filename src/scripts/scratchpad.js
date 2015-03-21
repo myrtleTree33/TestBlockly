@@ -9,16 +9,23 @@ require("./blastSpritesTerrain");
 require("./blastFrameworkBlocks");
 require("./expose");
 
-Android.setGameLoadedFlag();
+/** Setup Android app hook if in AI2 mode **/
+if (typeof Android !== 'undefined') {
+    Android.setGameLoadedFlag();
+}
 
 console.log("[ BLAST framework loaded ]");
 
 
-//api.Echo('hello world!');
-//api.CreateSky();
-//api.CreatePlatform(0, 150);
-//api.CreateRock(50,0,70);
-//api.GenerateGame();
+/** For debug purposes, comment if unneeded **/
+
+api.Echo('hello world!');
+api.CreateSky();
+api.CreatePlatform(0, 500);
+api.CreateRock(50,0,70);
+api.CreateTree(100,50);
+api.CreateBullet(0,50,10,150,0);
+api.GenerateGame();
 
 //$blast.appendCode('once', 'log', {
 //    message: 'hello world!'

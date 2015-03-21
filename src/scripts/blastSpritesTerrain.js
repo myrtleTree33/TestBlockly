@@ -26,9 +26,9 @@ __generators.SimpleSprite = function (name) {
 
     var _init = function (scope) {
         _scope = scope;
-        if (!name) {
+        // create or assign new name
+        if (!name || name === "") {
             _scope.name = uuid.v4();
-            console.debug('No name found.  Generating unique name=' + _scope.name);
         } else {
             _scope.name = name;
         }
@@ -95,9 +95,11 @@ __generators.sky = function (name) {
     var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
-        nativeObject._init(this);
         var sky = $blast._groups.background.create(0, 0, 'sky');
+        sky.group = "background";
         console.debug("Init sky.");
+        this.obj = sky; // add to object
+        nativeObject._init(this);
     };
 
     var kill = function () {
@@ -115,11 +117,13 @@ __generators.platform = function (x,y) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        nativeObject._init(this);
-
         var ledge = $blast._groups.terrain.create(x, y, 'ground');
+
+        ledge.group = "terrain";
         ledge.body.immovable = true;
         console.debug(ledge);
+        this.obj = ledge; // add to object
+        nativeObject._init(this);
         console.debug("Init platform at x=" + x + ',' + y);
     };
 
@@ -138,12 +142,14 @@ __generators.rock = function (x,y, gravity) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        nativeObject._init(this);
         var rock = $blast._groups.destructibles.create(x, y, 'firstaid');
+        rock.group = "destructibles";
         rock.body.gravity.y = gravity;
         rock.body.bounce.y = 0.7 + Math.random() * 0.2;
         rock.outOfBoundsKill = true;
         rock.body.collideWorldBounds = true;
+        this.obj = rock; // add to object
+        nativeObject._init(this);
         console.debug("Init rock at x=" + x + ',' + y);
     };
 
@@ -156,6 +162,69 @@ __generators.rock = function (x,y, gravity) {
         kill: kill
     });
 };
+
+//TODO Refactor _init to include the created object sprite, and reference
+// _init($scope, sprite)
+// sprite.group and sprite.id should be defined
+// these should be included in the collision manager
+
+
+__generators.tree = function (x,y, gravity) {
+    var nativeObject = __generators.SimpleSprite();
+
+    var init = function () {
+        var rock = $blast._groups.terrain.create(x, y, 'tree35');
+        rock.group = "terrain";
+        //rock.body.immovable = true;
+        rock.body.gravity.y = gravity;
+        rock.body.bounce.y = 0.1 + Math.random() * 0.1;
+        rock.outOfBoundsKill = true;
+        rock.body.collideWorldBounds = true;
+        this.obj = rock; // add to object
+        nativeObject._init(this);
+        console.debug("Init tree at x=" + x + ',' + y);
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+};
+
+
+__generators.bullet = function (x,y, gravity, xVel, yVel) {
+    var nativeObject = __generators.SimpleSprite();
+
+    var init = function () {
+        var bullet = $blast._groups.destructibles.create(x, y, 'diamond');
+        bullet.group = "terrain";
+        bullet.body.velocity.x = xVel;
+        bullet.body.velocity.y = yVel;
+        bullet.body.gravity.y = gravity;
+        bullet.body.bounce.y = 0.7 + Math.random() * 0.2;
+        bullet.outOfBoundsKill = true;
+        bullet.body.collideWorldBounds = true;
+        this.obj = bullet; // add to object
+        nativeObject._init(this);
+        console.debug('Init bullet at (' + x + ',' + y + '),' + 'vel=(' + xVel + ',' + yVel + ')' );
+
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+};
+
+
 
 __generators.a = function () {
     console.log('extended!!');
