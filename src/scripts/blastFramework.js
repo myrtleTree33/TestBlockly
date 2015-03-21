@@ -78,9 +78,11 @@ var Blast = (function () {
     };
 
 
-    var _collisionManager = function(obj1, obj2) {
+    var _collisionManager = function(nativePhaserSpriteA, nativePhaserSpriteB) {
         console.log('Received collision!');
-        console.log(obj1);
+        var spriteA = _accumulator[nativePhaserSpriteA.name]
+            , spriteB = _accumulator[nativePhaserSpriteB.name];
+        console.log(spriteA);
     }
 
 

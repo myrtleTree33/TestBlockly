@@ -27,11 +27,13 @@ __generators.SimpleSprite = function (name) {
     var _init = function (scope) {
         _scope = scope;
         // create or assign new name
-        if (!name || name === "") {
+        if (name === "" || !name) {
             _scope.name = uuid.v4();
         } else {
             _scope.name = name;
         }
+        console.log(_scope);
+        _scope.obj.name = _scope.name;
         $blast.registerObject(_scope.name, _scope);
         console.debug('SimpleSprite=' + _scope.name + ' created');
     }
