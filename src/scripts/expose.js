@@ -61,6 +61,13 @@ api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel) {
 };
 
 
+api.prototype.DeleteSprite = function(name) {
+    $blast.appendCode('once', 'deleteSprite', {
+        name: name
+    });
+}
+
+
 api.prototype.GenerateGame = function () {
     $blast.generateGame();
 }

@@ -156,6 +156,9 @@ __generators.rock = function (x,y, gravity) {
     };
 
     var kill = function () {
+        console.log("=KILL= I got called");
+        console.log (this);
+        this.obj.kill();
         nativeObject._kill();
     };
 
