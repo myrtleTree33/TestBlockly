@@ -89,5 +89,4 @@ __blocks.deleteSprite = function (opts) {
     var name = opts.name || '';
     var code = '$blast.deregisterObject(\'' + name + '\');';
     return code;
-
 };

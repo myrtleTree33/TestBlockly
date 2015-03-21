@@ -10,7 +10,7 @@ require("./blastFrameworkBlocks");
 require("./expose");
 
 /** Setup Android app hook if in AI2 mode **/
-if (typeof Android !== 'undefined') {
+if (hasAndroid) {
     Android.setGameLoadedFlag();
 }
 

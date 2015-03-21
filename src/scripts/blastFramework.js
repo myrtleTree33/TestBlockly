@@ -7,7 +7,8 @@
  *
  */
 
-'use strict';
+require('./blastFramework_bootstrap');
+
 
 var Blast = (function () {
     /** Private variables **/
@@ -78,11 +79,15 @@ var Blast = (function () {
     };
 
 
-    var _collisionManager = function(nativePhaserSpriteA, nativePhaserSpriteB) {
+    var _collisionManager = function (nativePhaserSpriteA, nativePhaserSpriteB) {
         console.log('Received collision!');
         var spriteA = _accumulator[nativePhaserSpriteA.name]
             , spriteB = _accumulator[nativePhaserSpriteB.name];
-        console.log(spriteA);
+        console.log('Detected collision=(' + spriteA.name + ',' + spriteA.obj.group + ') ('
+                        + spriteB.name + ',' + spriteB.obj.group + ')');
+        if (hasAndroid) {
+            Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
+        }
     }
 
 
