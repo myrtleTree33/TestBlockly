@@ -68,6 +68,15 @@ api.prototype.DeleteSprite = function(name) {
 }
 
 
+api.prototype.SetPosition = function(name,x,y) {
+    $blast.appendCode('once', 'setPosition', {
+        name: name,
+        x: x,
+        y: y
+    });
+}
+
+
 api.prototype.GenerateGame = function () {
     $blast.generateGame();
 }

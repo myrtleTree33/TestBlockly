@@ -141,6 +141,7 @@ __generators.platform = function (x,y) {
 
 
 __generators.rock = function (x,y, gravity) {
+    //var nativeObject = __generators.SimpleSprite('rock1');
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {

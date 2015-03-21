@@ -6,6 +6,7 @@
 
 require("./blastFramework");
 require("./blastSpritesTerrain");
+require("./blastFramework_actions");
 require("./blastFrameworkBlocks");
 require("./expose");
 
@@ -28,8 +29,10 @@ api.CreateTree(100,50);
 api.CreateBullet(0,50,10,150,0);
 setTimeout(function () {
     console.log ("TRIGGERED==========");
-    api.DeleteSprite('rock1');
+    //api.DeleteSprite('rock1');
+    api.SetPosition ('rock1', 50, 50);
 }, 3000);
+
 api.GenerateGame();
 
 

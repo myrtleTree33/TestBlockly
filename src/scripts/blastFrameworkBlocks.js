@@ -90,3 +90,16 @@ __blocks.deleteSprite = function (opts) {
     var code = '$blast.deregisterObject(\'' + name + '\');';
     return code;
 };
+
+
+__blocks.setPosition = function (opts) {
+    //TODO there is a problem with this
+    var opts = opts || {};
+    var name = opts.name || '';
+    var x = opts.x || 0;
+    var y = opts.y || 0;
+    var code = '$blast.sprite.actions.setPosition(' + '\'' + name + '\'' + ','
+        + x + ',' + y + ');\n';
+    return code;
+
+};

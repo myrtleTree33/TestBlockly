@@ -15,7 +15,8 @@ var Blast = (function () {
 
     /** Used to store sprite behavior / easy object creation **/
     var sprite = {
-        generators: {}
+        generators: {},
+        actions: {}
     };
     /** Used to store code blocks **/
     var _blocks = {};
@@ -137,6 +138,18 @@ var Blast = (function () {
 
     }
 
+    var getObject = function(name) {
+        var _name = name || '';
+        console.log ('i am here');
+        var target = _accumulator[_name];
+        if (target) {
+            console.log ('Sprite retrieved: ' + _name);
+        } else {
+            console.log ('Sprite retrieved: undefined');
+        }
+        return target;
+    }
+
     /**
      * Generates a code snippet, based on blocks.
      * @returns {string}
@@ -230,6 +243,7 @@ var Blast = (function () {
         _collisionManager: _collisionManager,
         registerObject: registerObject,
         deregisterObject: deregisterObject,
+        getObject: getObject,
         generateGame: generateGame,
         appendCode: appendCode
     };
@@ -240,6 +254,7 @@ module.exports = Blast;
 
 window.$blast = new Blast();
 window.__generators = Blast.prototype.sprite.generators; // extending sprite generators
+window.__actions = Blast.prototype.sprite.actions; // extending sprite generators
 window.__blocks = Blast.prototype._blocks;
 window.__groups = $blast._groups;
 window.__game = $blast._game;
