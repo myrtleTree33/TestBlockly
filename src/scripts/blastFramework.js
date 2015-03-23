@@ -42,6 +42,7 @@ var Blast = (function () {
             __._game.load.image('diamond', 'images/assets/diamond.png');
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
+            __._game.load.spritesheet('explosion', 'images/assets/explosion1.png', 128, 128);
 
             /** From Kenny images **/
             __._game.load.image('tree35', 'images/assets/tree35.png');

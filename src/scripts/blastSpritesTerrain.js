@@ -141,8 +141,8 @@ __generators.platform = function (x,y) {
 
 
 __generators.rock = function (x,y, gravity) {
-    //var nativeObject = __generators.SimpleSprite('rock1');
-    var nativeObject = __generators.SimpleSprite();
+    var nativeObject = __generators.SimpleSprite('rock1');
+    //var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
         var rock = $blast._groups.destructibles.create(x, y, 'firstaid');
@@ -158,8 +158,16 @@ __generators.rock = function (x,y, gravity) {
 
     var kill = function () {
         console.log("=KILL= I got called");
-        console.log (this);
-        this.obj.kill();
+        var explosion = $blast._game.add.sprite(this.obj.x, this.obj.y,'explosion');
+        explosion.anchor.setTo(0.5,0.5);
+        var anim = explosion.animations.add('explode', null, 60, false);
+        anim.killOnComplete = true;
+        anim.play('explode');
+        anim.onComplete.add(function() {
+            console.log('Explosion played.');
+            explosion.kill();
+        });
+        this.obj.destroy();
         nativeObject._kill();
     };
 
