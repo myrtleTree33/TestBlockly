@@ -1,8 +1,8 @@
 'use strict';
 
 require("./blastFramework");
-require("./blastSpritesTerrain");
-require("./blastFrameworkBlocks");
+require("./blastFramework_sprites_terrain");
+require("./blastFramework_blocks");
 
 var api = function () {
 };
@@ -24,16 +24,18 @@ api.prototype.CreateSky = function () {
 };
 
 
-api.prototype.CreatePlatform = function (x, y) {
+api.prototype.CreatePlatform = function (group, x, y) {
     $blast.appendCode('onCreate', 'createPlatform', {
+        group: group,
         x: x,
         y: y
     });
 };
 
 
-api.prototype.CreateRock = function (x, y, gravity) {
+api.prototype.CreateRock = function (group, x, y, gravity) {
     $blast.appendCode('onCreate', 'createRock', {
+        group: group,
         x: x,
         y: y,
         gravity: gravity
@@ -41,8 +43,9 @@ api.prototype.CreateRock = function (x, y, gravity) {
 };
 
 
-api.prototype.CreateTree = function (x, y, gravity) {
+api.prototype.CreateTree = function (group, x, y, gravity) {
     $blast.appendCode('onCreate', 'createTree', {
+        group: group,
         x: x,
         y: y,
         gravity: gravity

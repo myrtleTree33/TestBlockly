@@ -115,13 +115,13 @@ __generators.sky = function (name) {
 };
 
 
-__generators.platform = function (x,y) {
+__generators.platform = function (group, x,y) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        var ledge = $blast._groups.terrain.create(x, y, 'ground');
+        var ledge = $blast._groups[group].create(x, y, 'ground');
 
-        ledge.group = "terrain";
+        ledge.group = group;
         ledge.body.immovable = true;
         console.debug(ledge);
         this.obj = ledge; // add to object
@@ -140,13 +140,13 @@ __generators.platform = function (x,y) {
 };
 
 
-__generators.rock = function (x,y, gravity) {
+__generators.rock = function (group, x,y, gravity) {
     var nativeObject = __generators.SimpleSprite('rock1');
     //var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        var rock = $blast._groups.destructibles.create(x, y, 'firstaid');
-        rock.group = "destructibles";
+        var rock = $blast._groups[group].create(x, y, 'firstaid');
+        rock.group = group;
         rock.body.gravity.y = gravity;
         rock.body.bounce.y = 0.7 + Math.random() * 0.2;
         rock.outOfBoundsKill = true;
@@ -183,12 +183,12 @@ __generators.rock = function (x,y, gravity) {
 // these should be included in the collision manager
 
 
-__generators.tree = function (x,y, gravity) {
+__generators.tree = function (group, x,y, gravity) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        var rock = $blast._groups.terrain.create(x, y, 'tree35');
-        rock.group = "terrain";
+        var rock = $blast._groups[group].create(x, y, 'tree35');
+        rock.group = group;
         //rock.body.immovable = true;
         rock.body.gravity.y = gravity;
         rock.body.bounce.y = 0.1 + Math.random() * 0.1;
@@ -215,7 +215,7 @@ __generators.bullet = function (x,y, gravity, xVel, yVel) {
 
     var init = function () {
         var bullet = $blast._groups.destructibles.create(x, y, 'diamond');
-        bullet.group = "terrain";
+        bullet.group = "bullet";
         bullet.body.velocity.x = xVel;
         bullet.body.velocity.y = yVel;
         bullet.body.gravity.y = gravity;

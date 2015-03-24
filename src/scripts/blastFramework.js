@@ -54,15 +54,20 @@ var Blast = (function () {
 
             /** Create groups **/
             __._groups.background = __._game.add.group();
-            __._groups.terrain = __._game.add.group();
-            __._groups.terrain.enableBody = true;
+            __._groups.terrain1 = __._game.add.group();
+            __._groups.terrain2 = __._game.add.group();
             __._groups.powerups = __._game.add.group();
             __._groups.destructibles = __._game.add.group();
-            __._groups.destructibles.enableBody = true;
-            __._groups.player = __._game.add.group();
+            __._groups.player1 = __._game.add.group();
+            __._groups.player2 = __._game.add.group();
             __._groups.enemy1 = __._game.add.group();
             __._groups.enemy2 = __._game.add.group();
             __._groups.enemy3 = __._game.add.group();
+            __._groups.bullet = __._game.add.group();
+
+            /** Which has physics **/
+            __._groups.terrain1.enableBody = true;
+            __._groups.destructibles.enableBody = true;
         },
         onUpdate: function () {
             var __ = $blast;
@@ -75,8 +80,10 @@ var Blast = (function () {
             }
 
             // collision detection
-            __._game.physics.arcade.collide(__._groups.terrain, __._groups.destructibles, _collisionManager);
-            __._game.physics.arcade.collide(__._groups.terrain, __._groups.terrain);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain1);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.terrain2);
+            __._game.physics.arcade.collide(__._groups.bullet, __._groups.bullet);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.destructibles, _collisionManager);
         }
     };
 

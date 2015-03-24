@@ -43,19 +43,21 @@ __blocks.createSky = function (opts) {
 
 __blocks.createPlatform = function (opts) {
     var opts = opts || {};
+    var group = opts.group || 'terrain1';
     var x = opts.x || 0;
     var y = opts.y || 0;
-    var code = 'var sprite = $blast.sprite.generators.platform(' + x + ',' + y + ').init();\n';
+    var code = 'var sprite = $blast.sprite.generators.platform(\'' + group + '\',' + x + ',' + y + ').init();\n';
     return code;
 };
 
 
 __blocks.createRock = function (opts) {
     var opts = opts || {};
+    var group = opts.group || 'terrain1';
     var x = opts.x || 0;
     var y = opts.y || 0;
     var gravity = opts.gravity || 30;
-    var code = 'var sprite = $blast.sprite.generators.rock(' + x + ','
+    var code = 'var sprite = $blast.sprite.generators.rock(\'' + group + '\',' + x + ','
         + y + ',' + gravity + ').init();\n';
     return code;
 };
@@ -63,10 +65,11 @@ __blocks.createRock = function (opts) {
 
 __blocks.createTree = function (opts) {
     var opts = opts || {};
+    var group = opts.group || 'terrain1';
     var x = opts.x || 0;
     var y = opts.y || 0;
     var gravity = opts.gravity || 900;
-    var code = 'var sprite = $blast.sprite.generators.tree(' + x + ','
+    var code = 'var sprite = $blast.sprite.generators.tree(\'' + group + '\',' + x + ','
         + y + ',' + gravity + ').init();\n';
     return code;
 };
@@ -101,5 +104,4 @@ __blocks.setPosition = function (opts) {
     var code = '$blast.sprite.actions.setPosition(' + '\'' + name + '\'' + ','
         + x + ',' + y + ');\n';
     return code;
-
 };

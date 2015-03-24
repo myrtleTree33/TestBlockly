@@ -5,10 +5,10 @@
 'use strict';
 
 require("./blastFramework");
-require("./blastSpritesTerrain");
+require("./blastFramework_sprites_terrain");
 require("./blastFramework_actions");
-require("./blastFrameworkBlocks");
-require("./expose");
+require("./blastFramework_blocks");
+require("./blastFramework_expose");
 
 /** Setup Android app hook if in AI2 mode **/
 if (hasAndroid) {
@@ -23,9 +23,9 @@ console.log("[ BLAST framework loaded ]");
 
 api.Echo('hello world!');
 api.CreateSky();
-api.CreatePlatform(0, 500);
-api.CreateRock(50,0,70);
-api.CreateTree(100,50);
+api.CreatePlatform('terrain1', 0, 500);
+api.CreateRock('terrain1', 50,0,70);
+api.CreateTree('terrain1', 100,50);
 api.CreateBullet(0,50,10,150,0);
 setTimeout(function () {
     console.log ("TRIGGERED==========");
