@@ -229,6 +229,7 @@ __generators.bullet = function (x,y, gravity, xVel, yVel, angle) {
         bullet.outOfBoundsKill = true;
         bullet.anchor.setTo(0.5,0);
         bullet.checkWorldBounds = true;
+        //TODO: Remove setting angle option.  depend on velocity instead
         //bullet.angle = angle;
         bullet.update = function() {
             var vel = bullet.body.velocity;
