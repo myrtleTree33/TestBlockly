@@ -145,7 +145,7 @@ __generators.rock = function (group, x,y, gravity) {
     //var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        var rock = $blast._groups[group].create(x, y, 'firstaid');
+        var rock = $blast._groups[group].create(x, y, 'rock1');
         rock.group = group;
         rock.body.gravity.y = gravity;
         rock.body.bounce.y = 0.7 + Math.random() * 0.2;
@@ -158,15 +158,7 @@ __generators.rock = function (group, x,y, gravity) {
 
     var kill = function () {
         console.log("=KILL= I got called");
-        var explosion = $blast._game.add.sprite(this.obj.x, this.obj.y,'explosion');
-        explosion.anchor.setTo(0.5,0.5);
-        var anim = explosion.animations.add('explode', null, 60, false);
-        anim.killOnComplete = true;
-        anim.play('explode');
-        anim.onComplete.add(function() {
-            console.log('Explosion played.');
-            explosion.kill();
-        });
+        __generators.explosion(this.obj.x,this.obj.y);
         this.obj.destroy();
         nativeObject._kill();
     };
@@ -176,6 +168,20 @@ __generators.rock = function (group, x,y, gravity) {
         kill: kill
     });
 };
+
+
+__generators.explosion = function(x,y) {
+    var explosion = $blast._game.add.sprite(x, y,'explosion');
+    explosion.anchor.setTo(0.5,0.5);
+    var anim = explosion.animations.add('explode', null, 60, false);
+    anim.killOnComplete = true;
+    anim.play('explode');
+    anim.onComplete.add(function() {
+        console.log('Explosion at (' + x + ',' + y + ')');
+        explosion.kill();
+    });
+};
+
 
 //TODO Refactor _init to include the created object sprite, and reference
 // _init($scope, sprite)
@@ -210,25 +216,40 @@ __generators.tree = function (group, x,y, gravity) {
 };
 
 
-__generators.bullet = function (x,y, gravity, xVel, yVel) {
+__generators.bullet = function (x,y, gravity, xVel, yVel, angle) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
-        var bullet = $blast._groups.destructibles.create(x, y, 'diamond');
+        var bullet = $blast._groups.bullet.create(x, y, 'bullet1');
         bullet.group = "bullet";
         bullet.body.velocity.x = xVel;
         bullet.body.velocity.y = yVel;
         bullet.body.gravity.y = gravity;
         bullet.body.bounce.y = 0.7 + Math.random() * 0.2;
         bullet.outOfBoundsKill = true;
-        bullet.body.collideWorldBounds = true;
+        bullet.anchor.setTo(0.5,0);
+        bullet.checkWorldBounds = true;
+        //bullet.angle = angle;
+        bullet.update = function() {
+            var vel = bullet.body.velocity;
+            bullet.angle = - Math.atan2(vel.x,vel.y)/(Math.PI/180) + 180;
+        };
+        console.log("ANGLE: " + bullet.angle);
         this.obj = bullet; // add to object
         nativeObject._init(this);
         console.debug('Init bullet at (' + x + ',' + y + '),' + 'vel=(' + xVel + ',' + yVel + ')' );
+        bullet.events.onOutOfBounds.add(function() {
+            console.log(bullet.name);
+            $blast.deregisterObject(bullet.name);
+            console.log ("OUT OF SCREEN");
+        }, bullet);
 
     };
 
     var kill = function () {
+        console.log("=KILL= I got called");
+        __generators.explosion(this.obj.x,this.obj.y);
+        this.obj.destroy();
         nativeObject._kill();
     };
 

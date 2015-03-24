@@ -37,7 +37,9 @@ var Blast = (function () {
 
             /** For testing **/
             __._game.load.image('sky', 'images/assets/sky.png');
+            __._game.load.image('rock1', 'images/assets/meteorBrown_small2.png');
             __._game.load.image('ground', 'images/assets/platform.png');
+            __._game.load.image('bullet1', 'images/assets/laserBlue01.png');
             __._game.load.image('star', 'images/assets/star.png');
             __._game.load.image('diamond', 'images/assets/diamond.png');
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
@@ -67,7 +69,9 @@ var Blast = (function () {
 
             /** Which has physics **/
             __._groups.terrain1.enableBody = true;
+            __._groups.terrain2.enableBody = true;
             __._groups.destructibles.enableBody = true;
+            __._groups.bullet.enableBody = true;
         },
         onUpdate: function () {
             var __ = $blast;
@@ -80,10 +84,23 @@ var Blast = (function () {
             }
 
             // collision detection
+            /** terrain 1 **/
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain2);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain1);
-            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.terrain2);
-            __._game.physics.arcade.collide(__._groups.bullet, __._groups.bullet);
-            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.destructibles, _collisionManager);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.powerups);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.destructibles);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.player1);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.player2);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.enemy1);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.enemy2);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.enemy3);
+
+            /** Terrain 2 **/
+
+            /** Bullet **/
+            __._game.physics.arcade.collide(__._groups.bullet, __._groups.destructibles, _collisionManager);
+            __._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain1, _collisionManager);
+            __._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain2, _collisionManager);
         }
     };
 
@@ -94,6 +111,17 @@ var Blast = (function () {
             , spriteB = _accumulator[nativePhaserSpriteB.name];
         console.log('Detected collision=(' + spriteA.name + ',' + spriteA.obj.group + ') ('
                         + spriteB.name + ',' + spriteB.obj.group + ')');
+
+        if (spriteA.obj.group === 'bullet') {
+            $blast.deregisterObject(spriteA.obj.name);
+            return;
+        }
+
+        if (spriteB.obj.group === 'bullet') {
+            $blast.deregisterObject(spriteB.obj.name);
+            return;
+        }
+
         if (hasAndroid) {
             Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
         }

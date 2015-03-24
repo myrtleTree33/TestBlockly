@@ -53,13 +53,14 @@ api.prototype.CreateTree = function (group, x, y, gravity) {
 };
 
 
-api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel) {
+api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel, angle) {
     $blast.appendCode('onCreate', 'createBullet', {
         x: x,
         y: y,
         gravity: gravity,
         xVel: xVel,
-        yVel: yVel
+        yVel: yVel,
+        angle: angle
     });
 };
 

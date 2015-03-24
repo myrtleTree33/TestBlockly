@@ -24,9 +24,10 @@ console.log("[ BLAST framework loaded ]");
 api.Echo('hello world!');
 api.CreateSky();
 api.CreatePlatform('terrain1', 0, 500);
-api.CreateRock('terrain1', 50,0,70);
+api.CreateRock('terrain2', 50,0,70);
 api.CreateTree('terrain1', 100,50);
-api.CreateBullet(0,50,10,150,0);
+api.CreateBullet(20,50,70,30, 30, 90);
+api.CreateBullet(150,50,60,-10, 70, 90);
 setTimeout(function () {
     console.log ("TRIGGERED==========");
     api.DeleteSprite('rock1');
