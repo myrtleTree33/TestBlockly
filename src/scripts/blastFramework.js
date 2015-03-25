@@ -85,8 +85,8 @@ var Blast = (function () {
 
             // collision detection
             /** terrain 1 **/
-            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain2);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain1);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.terrain2);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.powerups);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.destructibles);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.player1);
@@ -96,11 +96,23 @@ var Blast = (function () {
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.enemy3);
 
             /** Terrain 2 **/
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.terrain2);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.terrain1);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.powerups);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.destructibles);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.player1);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.player2);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.enemy1);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.enemy2);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.enemy3);
 
             /** Bullet **/
-            __._game.physics.arcade.collide(__._groups.bullet, __._groups.destructibles, _collisionManager);
-            __._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain1, _collisionManager);
-            __._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain2, _collisionManager);
+            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.destructibles);
+            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain1);
+            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain2);
+            __._game.physics.arcade.collide(__._groups.destructibles, __._groups.bullet, _collisionManager,null,this);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.bullet, _collisionManager,null, this);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.bullet, _collisionManager,null, this);
         }
     };
 
@@ -112,12 +124,9 @@ var Blast = (function () {
         console.log('Detected collision=(' + spriteA.name + ',' + spriteA.obj.group + ') ('
                         + spriteB.name + ',' + spriteB.obj.group + ')');
 
-        if (spriteA.obj.group === 'bullet') {
-            $blast.deregisterObject(spriteA.obj.name);
-            return;
-        }
-
+        /** Warning: Deleting SpriteA will cause game to crash **/
         if (spriteB.obj.group === 'bullet') {
+            console.log ("BULLET");
             $blast.deregisterObject(spriteB.obj.name);
             return;
         }

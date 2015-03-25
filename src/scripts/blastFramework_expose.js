@@ -54,7 +54,7 @@ api.prototype.CreateTree = function (group, x, y, gravity) {
 
 
 api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel, angle) {
-    $blast.appendCode('onCreate', 'createBullet', {
+    $blast.appendCode('once', 'createBullet', {
         x: x,
         y: y,
         gravity: gravity,

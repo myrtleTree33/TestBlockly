@@ -198,6 +198,7 @@ __generators.tree = function (group, x,y, gravity) {
         //rock.body.immovable = true;
         rock.body.gravity.y = gravity;
         rock.body.bounce.y = 0.1 + Math.random() * 0.1;
+        rock.body.mass = 9999;
         rock.outOfBoundsKill = true;
         rock.body.collideWorldBounds = true;
         this.obj = rock; // add to object
