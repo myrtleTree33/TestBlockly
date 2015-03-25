@@ -64,6 +64,17 @@ api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel) {
 };
 
 
+api.prototype.CreatePlayer = function (group, name, x, y, gravity) {
+    $blast.appendCode('once', 'createPlayer', {
+        group: group,
+        name: name,
+        x: x,
+        y: y,
+        gravity: gravity,
+    });
+};
+
+
 api.prototype.DeleteSprite = function(name) {
     $blast.appendCode('once', 'deleteSprite', {
         name: name
@@ -76,6 +87,14 @@ api.prototype.SetPosition = function(name,x,y) {
         name: name,
         x: x,
         y: y
+    });
+}
+
+
+api.prototype.SetState = function(name,state) {
+    $blast.appendCode('once', 'setState', {
+        name: name,
+        state: state
     });
 }
 

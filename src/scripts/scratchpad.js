@@ -20,23 +20,37 @@ console.log("[ BLAST framework loaded ]");
 
 /** For debug purposes, comment if unneeded **/
 
-//api.Echo('hello world!');
-//api.CreateSky();
-//api.CreatePlatform('terrain2', 0, 400);
-////api.CreateRock('terrain2', 50,0,70);
-//api.CreateTree('terrain1', 50,0, 900);
-//api.CreateBullet(250,20,20,0, 90);
-//api.GenerateGame();
 /*
  api.CreateBullet(150,50,60,-10, 70);
  api.CreateBullet(250,20,20, 0, 90);
- setTimeout(function () {
- console.log ("TRIGGERED==========");
- //api.DeleteSprite('rock1');
- //api.SetPosition ('rock1', 50, 50);
- }, 3000);
+ */
 
-*/
+
+api.Echo('hello world!');
+api.CreateSky();
+api.CreatePlatform('terrain2', 0, 400);
+//api.CreateRock('terrain2', 50,0,70);
+api.CreateTree('terrain1', 50, 0, 900);
+api.CreateBullet(250, 20, 20, 0, 90);
+api.CreatePlayer('player1', 'john', 70, 0, 200);
+api.SetState('john', 'moveRight');
+
+
+setInterval(function () {
+    api.CreateBullet(Math.random() * 250, 20, 20, 100 + Math.random() * 100, 100 + Math.random() * 100);
+}, 1000);
+
+setTimeout(function () {
+    console.log("TRIGGERED==========");
+    //api.DeleteSprite('john');
+    api.SetState('john', 'moveLeft');
+    api.SetState('john', 'jump');
+    api.SetPosition('john', 50, 50);
+}, 3000);
+
+api.GenerateGame();
+
+
 
 //$blast.appendCode('once', 'log', {
 //    message: 'hello world!'
@@ -77,5 +91,4 @@ console.log("[ BLAST framework loaded ]");
 //});
 //$blast.appendCode('once', 'createSimpleSprite');
 //$blast.generateGame();
-
 

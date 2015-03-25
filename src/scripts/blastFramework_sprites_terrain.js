@@ -259,6 +259,66 @@ __generators.bullet = function (x,y, gravity, xVel, yVel) {
 };
 
 
+__generators.player = function (group, name, x, y, gravity) {
+    var nativeObject = __generators.SimpleSprite(name);
+    //var nativeObject = __generators.SimpleSprite();
+
+    var player = {};
+
+    var init = function () {
+        player = $blast._groups[group].create(x, y, 'dude');
+        player.group = group;
+        player.body.gravity.y = gravity;
+        player.body.bounce.y = 0.2;
+        player.outOfBoundsKill = true;
+        player.body.collideWorldBounds = true;
+        player.animations.add('left', [0,1,2,3], 10, true);
+        player.animations.add('right', [5,6,7,8], 10, true);
+        this.obj = player; // add to object
+        nativeObject._init(this);
+        console.debug("Init player at x=" + x + ',' + y);
+    };
+
+    var kill = function () {
+        console.log("John got removed??");
+        __generators.explosion(this.obj.x,this.obj.y);
+        this.obj.destroy();
+        nativeObject._kill();
+    };
+
+
+    var moveLeft = function() {
+        player.body.velocity.x = -150;
+        player.animations.play('left');
+    };
+
+
+    var moveRight = function() {
+        player.body.velocity.x = 150;
+        player.animations.play('right');
+    };
+
+
+    var stop = function() {
+        player.body.velocity.x = 0;
+      player.animations.stop();
+    };
+
+
+    var jump = function() {
+        player.body.velocity.y = -350;
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        moveLeft: moveLeft,
+        moveRight: moveRight,
+        stop: stop,
+        jump: jump,
+        kill: kill
+    });
+};
+
 
 __generators.a = function () {
     console.log('extended!!');

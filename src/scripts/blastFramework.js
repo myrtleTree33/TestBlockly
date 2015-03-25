@@ -70,6 +70,7 @@ var Blast = (function () {
             /** Which has physics **/
             __._groups.terrain1.enableBody = true;
             __._groups.terrain2.enableBody = true;
+            __._groups.player1.enableBody = true;
             __._groups.destructibles.enableBody = true;
             __._groups.bullet.enableBody = true;
         },

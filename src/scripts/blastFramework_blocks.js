@@ -88,6 +88,22 @@ __blocks.createBullet = function (opts) {
 };
 
 
+__blocks.createPlayer = function (opts) {
+    var opts = opts || {};
+    var group = opts.group || 'player1';
+    var name = opts.name || '';
+    var x = opts.x || 0;
+    var y = opts.y || 0;
+    var gravity = opts.gravity || 30;
+    var code = 'var sprite = $blast.sprite.generators.player('
+        + '\'' + group + '\','
+        + '\'' + name + '\','
+        + x + ','
+        + y + ',' + gravity + ').init();\n';
+    return code;
+};
+
+
 __blocks.deleteSprite = function (opts) {
     var name = opts.name || '';
     var code = '$blast.deregisterObject(\'' + name + '\');';
@@ -96,12 +112,23 @@ __blocks.deleteSprite = function (opts) {
 
 
 __blocks.setPosition = function (opts) {
-    //TODO there is a problem with this
     var opts = opts || {};
     var name = opts.name || '';
     var x = opts.x || 0;
     var y = opts.y || 0;
-    var code = '$blast.sprite.actions.setPosition(' + '\'' + name + '\'' + ','
-        + x + ',' + y + ');\n';
+
+    var code = '$blast.getObject(' + '\'' + name + '\').obj.x = ' + x + ';'
+        + '$blast.getObject(' + '\'' + name + '\').obj.y = ' + y + ';'
     return code;
 };
+
+
+__blocks.setState = function (opts) {
+    //TODO there is a problem with this
+    var opts = opts || {};
+    var name = opts.name || '';
+    var state = opts.state || 0;
+    var code = '$blast.getObject(' + '\'' + name + '\').' + state + '();';
+    return code;
+};
+

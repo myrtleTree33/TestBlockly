@@ -10,13 +10,3 @@
 
 //require("./blastFramework");
 
-__actions.setPosition = function (spriteName, x, y) {
-    var target = $blast.getObject(spriteName);
-    if (!target) {
-        console.log('failed to set position: unknown sprite');
-        return;
-    }
-    // set the new coordinates
-    target.obj.x = x;
-    target.obj.y = y;
-};
