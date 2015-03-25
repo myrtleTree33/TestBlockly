@@ -20,23 +20,23 @@ console.log("[ BLAST framework loaded ]");
 
 /** For debug purposes, comment if unneeded **/
 
+//api.Echo('hello world!');
+//api.CreateSky();
+//api.CreatePlatform('terrain2', 0, 400);
+////api.CreateRock('terrain2', 50,0,70);
+//api.CreateTree('terrain1', 50,0, 900);
+//api.CreateBullet(250,20,20,0, 90);
+//api.GenerateGame();
+/*
+ api.CreateBullet(150,50,60,-10, 70);
+ api.CreateBullet(250,20,20, 0, 90);
+ setTimeout(function () {
+ console.log ("TRIGGERED==========");
+ //api.DeleteSprite('rock1');
+ //api.SetPosition ('rock1', 50, 50);
+ }, 3000);
 
-api.Echo('hello world!');
-api.CreateSky();
-api.CreatePlatform('terrain2', 0, 500);
-api.CreateRock('terrain2', 50,0,70);
-api.CreateTree('terrain1', 100,50);
-api.CreateBullet(20,50,70,30, 30, 90);
-api.CreateBullet(150,50,60,-10, 70, 90);
-api.CreateBullet(250,20,20, 0, 90, 90);
-setTimeout(function () {
-    console.log ("TRIGGERED==========");
-    //api.DeleteSprite('rock1');
-    //api.SetPosition ('rock1', 50, 50);
-}, 3000);
-
-api.GenerateGame();
-
+*/
 
 //$blast.appendCode('once', 'log', {
 //    message: 'hello world!'

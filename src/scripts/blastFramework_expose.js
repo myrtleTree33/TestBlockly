@@ -34,7 +34,7 @@ api.prototype.CreatePlatform = function (group, x, y) {
 
 
 api.prototype.CreateRock = function (group, x, y, gravity) {
-    $blast.appendCode('onCreate', 'createRock', {
+    $blast.appendCode('once', 'createRock', {
         group: group,
         x: x,
         y: y,
@@ -44,7 +44,7 @@ api.prototype.CreateRock = function (group, x, y, gravity) {
 
 
 api.prototype.CreateTree = function (group, x, y, gravity) {
-    $blast.appendCode('onCreate', 'createTree', {
+    $blast.appendCode('once', 'createTree', {
         group: group,
         x: x,
         y: y,
@@ -53,14 +53,13 @@ api.prototype.CreateTree = function (group, x, y, gravity) {
 };
 
 
-api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel, angle) {
+api.prototype.CreateBullet = function (x, y, gravity, xVel, yVel) {
     $blast.appendCode('once', 'createBullet', {
         x: x,
         y: y,
         gravity: gravity,
         xVel: xVel,
-        yVel: yVel,
-        angle: angle
+        yVel: yVel
     });
 };
 

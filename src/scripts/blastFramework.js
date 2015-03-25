@@ -128,9 +128,10 @@ var Blast = (function () {
         if (spriteB.obj.group === 'bullet') {
             console.log ("BULLET");
             $blast.deregisterObject(spriteB.obj.name);
-            return;
+            //return;
         }
 
+        console.log('sending android collision event!');
         if (hasAndroid) {
             Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
         }

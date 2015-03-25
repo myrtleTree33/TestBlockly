@@ -82,9 +82,8 @@ __blocks.createBullet = function (opts) {
     var gravity = opts.gravity || 30;
     var xVel = opts.xVel || 0;
     var yVel = opts.yVel || 0;
-    var angle = opts.angle || 180;
     var code = 'var sprite = $blast.sprite.generators.bullet(' + x + ','
-        + y + ',' + gravity + ',' + xVel + ',' + yVel + ',' + angle + ').init();\n';
+        + y + ',' + gravity + ',' + xVel + ',' + yVel + ').init();\n';
     return code;
 };
 

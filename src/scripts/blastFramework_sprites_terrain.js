@@ -217,7 +217,7 @@ __generators.tree = function (group, x,y, gravity) {
 };
 
 
-__generators.bullet = function (x,y, gravity, xVel, yVel, angle) {
+__generators.bullet = function (x,y, gravity, xVel, yVel) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
@@ -230,13 +230,10 @@ __generators.bullet = function (x,y, gravity, xVel, yVel, angle) {
         bullet.outOfBoundsKill = true;
         bullet.anchor.setTo(0.5,0);
         bullet.checkWorldBounds = true;
-        //TODO: Remove setting angle option.  depend on velocity instead
-        //bullet.angle = angle;
         bullet.update = function() {
             var vel = bullet.body.velocity;
             bullet.angle = - Math.atan2(vel.x,vel.y)/(Math.PI/180) + 180;
         };
-        console.log("ANGLE: " + bullet.angle);
         this.obj = bullet; // add to object
         nativeObject._init(this);
         console.debug('Init bullet at (' + x + ',' + y + '),' + 'vel=(' + xVel + ',' + yVel + ')' );
