@@ -51,6 +51,20 @@ __blocks.createPlatform = function (opts) {
 };
 
 
+__blocks.createTilePlatform = function (opts) {
+    var opts = opts || {};
+    var group = opts.group || 'terrain1';
+    var x = opts.x || 0;
+    var y = opts.y || 0;
+    var width = opts.width || 20;
+    var height = opts.height || 20;
+    var code = 'var sprite = $blast.sprite.generators.tilePlatform(\'' + group
+            + '\',' + x + ',' + y
+            + ',' + width + ',' + height
+            +  ').init();\n';
+    return code;
+};
+
 __blocks.createRock = function (opts) {
     var opts = opts || {};
     var group = opts.group || 'terrain1';
@@ -131,4 +145,6 @@ __blocks.setState = function (opts) {
     var code = '$blast.getObject(' + '\'' + name + '\').' + state + '();';
     return code;
 };
+
+
 

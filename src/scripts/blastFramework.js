@@ -36,15 +36,19 @@ var Blast = (function () {
             //__._game.load.baseURL = "http://joeltong.org/phaser/";
 
             /** For testing **/
-            __._game.load.image('sky', 'images/assets/sky.png');
-            __._game.load.image('rock1', 'images/assets/meteorBrown_small2.png');
-            __._game.load.image('ground', 'images/assets/platform.png');
+            __._game.load.image('sky', 'images/assets/backgrounds/sky.png');
+            __._game.load.image('desert', 'images/assets/backgrounds/colored_desert.png');
+            __._game.load.image('rock1', 'images/assets/terrain/meteorBrown_small2.png');
+            __._game.load.image('ground', 'images/assets/terrain/platform.png');
             __._game.load.image('bullet1', 'images/assets/laserBlue01.png');
             __._game.load.image('star', 'images/assets/star.png');
             __._game.load.image('diamond', 'images/assets/diamond.png');
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
+            __._game.load.image('textureRock', 'images/assets/textures/stoneCenter.png');
+            __._game.load.image('textureSand', 'images/assets/textures/sandCenter.png');
+            __._game.load.spritesheet('textureMapBrick', 'images/assets/textures/brick_tiles_1.png',32,32);
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
-            __._game.load.spritesheet('explosion', 'images/assets/explosion1.png', 128, 128);
+            __._game.load.spritesheet('explosion', 'images/assets/explosions/explosion1.png', 128, 128);
 
             /** From Kenny images **/
             __._game.load.image('tree35', 'images/assets/tree35.png');
@@ -258,7 +262,7 @@ var Blast = (function () {
             update: __._callbacks.onUpdate
         });
         console.log(this._game);
-        __._game.scale.startFullScreen();
+        //__._game.scale.startFullScreen();
     };
 
     /**

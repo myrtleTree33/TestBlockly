@@ -25,13 +25,23 @@ api.prototype.CreateSky = function () {
 
 
 api.prototype.CreatePlatform = function (group, x, y) {
-    $blast.appendCode('onCreate', 'createPlatform', {
+    $blast.appendCode('once', 'createPlatform', {
         group: group,
         x: x,
         y: y
     });
 };
 
+
+api.prototype.CreateTilePlatform = function (group, x, y, width, height) {
+    $blast.appendCode('onCreate', 'createTilePlatform', {
+        group: group,
+        x: x,
+        y: y,
+        width: width,
+        height: height
+    });
+};
 
 api.prototype.CreateRock = function (group, x, y, gravity) {
     $blast.appendCode('once', 'createRock', {
@@ -79,7 +89,7 @@ api.prototype.DeleteSprite = function(name) {
     $blast.appendCode('once', 'deleteSprite', {
         name: name
     });
-}
+};
 
 
 api.prototype.SetPosition = function(name,x,y) {
@@ -88,7 +98,7 @@ api.prototype.SetPosition = function(name,x,y) {
         x: x,
         y: y
     });
-}
+};
 
 
 api.prototype.SetState = function(name,state) {
@@ -101,7 +111,76 @@ api.prototype.SetState = function(name,state) {
 
 api.prototype.GenerateGame = function () {
     $blast.generateGame();
-}
+};
+
+
+api.prototype.GetGameWidth = function(uuidStr) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getGameWidth());
+    }
+    console.log("WIDTH:" + __actions.getGameWidth());
+};
+
+
+api.prototype.GetGameHeight = function(uuidStr) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getGameHeight());
+    }
+    console.log("HEIGHT:" + __actions.getGameHeight());
+};
+
+
+api.prototype.GetSpriteX = function(uuidStr, name) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'x'));
+    }
+    console.log("X:" + __actions.getSpriteProp(name, 'x'));
+};
+
+
+api.prototype.SetSpriteX = function(name, x) {
+    __actions.setSpriteProp(name, 'x', x || 0);
+};
+
+
+api.prototype.GetSpriteY = function(uuidStr, name) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'y'));
+    }
+    console.log("Vel Y:" + __actions.getSpriteProp(name, 'y'));
+};
+
+
+api.prototype.SetSpriteY = function(name, y) {
+    __actions.setSpriteProp(name, 'y', y || 0);
+};
+
+
+api.prototype.GetSpriteVelY = function(uuidStr, name) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'velY'));
+    }
+    console.log("Y:" + __actions.getSpriteProp(name, 'velY'));
+};
+
+
+api.prototype.SetSpriteVelY = function(name, velY) {
+    __actions.setSpriteProp(name, 'velY', velY || 0);
+};
+
+
+api.prototype.GetSpriteVelX = function(uuidStr, name) {
+    if (hasAndroid) {
+        Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'velX'));
+    }
+    console.log("Vel X:" + __actions.getSpriteProp(name, 'velX'));
+};
+
+
+api.prototype.SetSpriteVelX = function(name, velX) {
+    __actions.setSpriteProp(name, 'velX', velX || 0);
+};
+
 
 
 if (typeof window !== 'undefined') {

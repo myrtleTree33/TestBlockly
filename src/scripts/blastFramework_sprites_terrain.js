@@ -97,7 +97,7 @@ __generators.sky = function (name) {
     var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
-        var sky = $blast._groups.background.create(0, 0, 'sky');
+        var sky = $blast._groups.background.create(0, 0, 'desert');
         sky.group = "background";
         console.debug("Init sky.");
         this.obj = sky; // add to object
@@ -127,6 +127,32 @@ __generators.platform = function (group, x,y) {
         this.obj = ledge; // add to object
         nativeObject._init(this);
         console.debug("Init platform at x=" + x + ',' + y);
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+};
+
+
+__generators.tilePlatform = function (group, x,y, width, height) {
+    var nativeObject = __generators.SimpleSprite();
+
+    var init = function () {
+        console.log($blast);
+        var target = $blast._game.add.tileSprite(x, y, width, height, 'textureSand', 2);
+        target = $blast._groups[group].add(target);
+
+        target.group = group;
+        target.body.immovable = true;
+        this.obj = target; // add to object
+        nativeObject._init(this);
+        console.debug("Init tiled platform at x=" + x + ',' + y);
     };
 
     var kill = function () {

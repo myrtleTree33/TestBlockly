@@ -28,7 +28,9 @@ console.log("[ BLAST framework loaded ]");
 
 api.Echo('hello world!');
 api.CreateSky();
-api.CreatePlatform('terrain2', 0, 400);
+//api.CreatePlatform('terrain2', 0, 500);
+api.CreateTilePlatform('terrain2', 50, 200, 200, 50);
+api.CreateTilePlatform('terrain2', 50, 500, 500, 500);
 //api.CreateRock('terrain2', 50,0,70);
 api.CreateTree('terrain1', 50, 0, 900);
 api.CreateBullet(250, 20, 20, 0, 90);
@@ -37,8 +39,22 @@ api.SetState('john', 'moveRight');
 
 
 setInterval(function () {
-    api.CreateBullet(Math.random() * 250, 20, 20, 100 + Math.random() * 100, 100 + Math.random() * 100);
+    //api.CreateBullet(Math.random() * 250, 20, 20, 100 + Math.random() * 100, 100 + Math.random() * 100);
+    //api.GetGameWidth();
+    api.GetGameHeight();
+    api.GetSpriteX('','john');
+    api.GetSpriteY('','john');
+    api.GetSpriteVelX('', 'john');
+    api.GetSpriteVelY('', 'john');
 }, 1000);
+
+
+setInterval(function () {
+    api.SetSpriteX('john', 300);
+    api.SetSpriteVelX('john', - 200 + 400 * Math.random());
+    api.SetSpriteVelY('john', -50 - 500 * Math.random());
+}, 2000);
+
 
 setTimeout(function () {
     console.log("TRIGGERED==========");
@@ -49,6 +65,13 @@ setTimeout(function () {
 }, 3000);
 
 api.GenerateGame();
+
+
+
+
+
+
+
 
 
 
