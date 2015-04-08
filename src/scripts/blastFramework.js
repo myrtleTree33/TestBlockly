@@ -77,6 +77,14 @@ var Blast = (function () {
             __._groups.player1.enableBody = true;
             __._groups.destructibles.enableBody = true;
             __._groups.bullet.enableBody = true;
+
+            // send state reporting every 0.1 sec
+            setInterval(function() {
+                var statesStr = JSON.stringify($blast.dumpState());
+                    if (hasAndroid) {
+                        Android.makeSpriteStates(statesStr);
+                    }
+            }, 200);
         },
         onUpdate: function () {
             var __ = $blast;
@@ -143,6 +151,28 @@ var Blast = (function () {
 
         console.log('sending android collision event!');
     }
+
+
+    var dumpState = function() {
+        var retVal = [];
+        if (!_accumulator) {
+            return retVal;
+        }
+        for (var key in _accumulator) {
+            var obj = _accumulator[key].obj;
+            if (obj) { // exists
+                var state = {
+                    name: key,
+                    x: obj.x,
+                    y: obj.y,
+                    velX: obj.body.velocity.x,
+                    velY: obj.body.velocity.y
+                }
+                retVal.push(state);
+            }
+        }
+        return retVal;
+    };
 
 
     var registerObject = function (name, obj) {
@@ -294,6 +324,7 @@ var Blast = (function () {
         _groups: _groups,
         _callbacks: _callbacks,
         _collisionManager: _collisionManager,
+        dumpState: dumpState,
         registerObject: registerObject,
         deregisterObject: deregisterObject,
         getObject: getObject,
