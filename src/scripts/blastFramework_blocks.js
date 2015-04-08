@@ -68,10 +68,11 @@ __blocks.createTilePlatform = function (opts) {
 __blocks.createRock = function (opts) {
     var opts = opts || {};
     var group = opts.group || 'terrain1';
+    var name = opts.name || '';
     var x = opts.x || 0;
     var y = opts.y || 0;
     var gravity = opts.gravity || 30;
-    var code = 'var sprite = $blast.sprite.generators.rock(\'' + group + '\',' + x + ','
+    var code = 'var sprite = $blast.sprite.generators.rock(\'' + group + '\',' + '\'' + name + '\',' + x + ','
         + y + ',' + gravity + ').init();\n';
     return code;
 };
@@ -80,10 +81,11 @@ __blocks.createRock = function (opts) {
 __blocks.createTree = function (opts) {
     var opts = opts || {};
     var group = opts.group || 'terrain1';
+    var name = opts.name || '';
     var x = opts.x || 0;
     var y = opts.y || 0;
     var gravity = opts.gravity || 900;
-    var code = 'var sprite = $blast.sprite.generators.tree(\'' + group + '\',' + x + ','
+    var code = 'var sprite = $blast.sprite.generators.tree(\'' + group + '\',' + '\'' + name + '\',' + x + ','
         + y + ',' + gravity + ').init();\n';
     return code;
 };

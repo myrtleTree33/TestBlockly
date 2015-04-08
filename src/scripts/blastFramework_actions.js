@@ -28,16 +28,19 @@ __actions.getGameHeight = function () {
 __actions.getSpriteProp = function (name, property) {
     var spriteObj;
     if (!$blast._game) {
-        return;
+        return -2;
     }
 
     spriteObj = $blast.getObject(name);
     if (!spriteObj) {
-        return;
+        return -4;
     }
 
-    if (property === 'x' || property === 'y') {
-        return spriteObj.obj[property];
+    if (property === 'x') {
+        return spriteObj.obj.x;
+
+    } else if (property === 'y') {
+        return spriteObj.obj.y;
 
     } else if (property === 'velX') {
         return spriteObj.obj.body.velocity.x;
@@ -45,7 +48,12 @@ __actions.getSpriteProp = function (name, property) {
     } else if (property === 'velY') {
         return spriteObj.obj.body.velocity.y;
 
+    } else {
+        return 23;
     }
+
+    return 46;
+
 };
 
 

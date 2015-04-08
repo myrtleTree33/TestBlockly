@@ -43,9 +43,10 @@ api.prototype.CreateTilePlatform = function (group, x, y, width, height) {
     });
 };
 
-api.prototype.CreateRock = function (group, x, y, gravity) {
+api.prototype.CreateRock = function (group, name, x, y, gravity) {
     $blast.appendCode('once', 'createRock', {
         group: group,
+        name: name,
         x: x,
         y: y,
         gravity: gravity
@@ -53,9 +54,10 @@ api.prototype.CreateRock = function (group, x, y, gravity) {
 };
 
 
-api.prototype.CreateTree = function (group, x, y, gravity) {
+api.prototype.CreateTree = function (group, name, x, y, gravity) {
     $blast.appendCode('once', 'createTree', {
         group: group,
+        name: name,
         x: x,
         y: y,
         gravity: gravity
@@ -116,15 +118,15 @@ api.prototype.GenerateGame = function () {
 
 api.prototype.GetGameWidth = function(uuidStr) {
     if (hasAndroid) {
-        Android.sendMessage(uuidStr, __actions.getGameWidth());
+        Android.sendMessage(uuidStr, __actions.getGameWidth().toString());
     }
-    console.log("WIDTH:" + __actions.getGameWidth());
+    console.log("WIDTH:" + __actions.getGameWidth().toString());
 };
 
 
 api.prototype.GetGameHeight = function(uuidStr) {
     if (hasAndroid) {
-        Android.sendMessage(uuidStr, __actions.getGameHeight());
+        Android.sendMessage(uuidStr, __actions.getGameHeight().toString());
     }
     console.log("HEIGHT:" + __actions.getGameHeight());
 };
@@ -132,9 +134,11 @@ api.prototype.GetGameHeight = function(uuidStr) {
 
 api.prototype.GetSpriteX = function(uuidStr, name) {
     if (hasAndroid) {
-        Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'x'));
+        Android.sendMessage(uuidStr, Number(__actions.getSpriteProp(name, 'x')).toString());
+        //Android.sendMessage(uuidStr, "46");
+        //Android.sendMessage(uuidStr, __actions.getGameHeight().toString());
     }
-    console.log("X:" + __actions.getSpriteProp(name, 'x'));
+    console.log("X:" + String(__actions.getSpriteProp(name, 'x')));
 };
 
 
@@ -146,6 +150,7 @@ api.prototype.SetSpriteX = function(name, x) {
 api.prototype.GetSpriteY = function(uuidStr, name) {
     if (hasAndroid) {
         Android.sendMessage(uuidStr, __actions.getSpriteProp(name, 'y'));
+        //Android.sendMessage(uuidStr, "20");
     }
     console.log("Vel Y:" + __actions.getSpriteProp(name, 'y'));
 };

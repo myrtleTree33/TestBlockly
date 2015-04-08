@@ -118,6 +118,7 @@ var Blast = (function () {
             __._game.physics.arcade.collide(__._groups.destructibles, __._groups.bullet, _collisionManager,null,this);
             __._game.physics.arcade.collide(__._groups.terrain1, __._groups.bullet, _collisionManager,null, this);
             __._game.physics.arcade.collide(__._groups.terrain2, __._groups.bullet, _collisionManager,null, this);
+
         }
     };
 
@@ -129,6 +130,10 @@ var Blast = (function () {
         console.log('Detected collision=(' + spriteA.name + ',' + spriteA.obj.group + ') ('
                         + spriteB.name + ',' + spriteB.obj.group + ')');
 
+        if (hasAndroid) {
+            Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
+        }
+
         /** Warning: Deleting SpriteA will cause game to crash **/
         if (spriteB.obj.group === 'bullet') {
             console.log ("BULLET");
@@ -137,9 +142,6 @@ var Blast = (function () {
         }
 
         console.log('sending android collision event!');
-        if (hasAndroid) {
-            Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
-        }
     }
 
 

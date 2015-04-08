@@ -166,9 +166,9 @@ __generators.tilePlatform = function (group, x,y, width, height) {
 };
 
 
-__generators.rock = function (group, x,y, gravity) {
-    var nativeObject = __generators.SimpleSprite('rock1');
-    //var nativeObject = __generators.SimpleSprite();
+__generators.rock = function (group, name, x,y, gravity) {
+    //var nativeObject = __generators.SimpleSprite('rock1');
+    var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
         var rock = $blast._groups[group].create(x, y, 'rock1');
@@ -215,8 +215,8 @@ __generators.explosion = function(x,y) {
 // these should be included in the collision manager
 
 
-__generators.tree = function (group, x,y, gravity) {
-    var nativeObject = __generators.SimpleSprite();
+__generators.tree = function (group, name, x,y, gravity) {
+    var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
         var rock = $blast._groups[group].create(x, y, 'tree35');
@@ -233,6 +233,9 @@ __generators.tree = function (group, x,y, gravity) {
     };
 
     var kill = function () {
+        console.log("=KILL= I got called");
+        __generators.explosion(this.obj.x,this.obj.y);
+        this.obj.destroy();
         nativeObject._kill();
     };
 
