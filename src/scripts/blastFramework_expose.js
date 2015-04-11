@@ -48,6 +48,15 @@ api.prototype.CreateSky = function () {
 };
 
 
+api.prototype.CreateTiledBackground = function (type, width, height) {
+    $blast.appendCode('once', 'createTiledBackground', {
+        type: type,
+        width: width,
+        height: height
+    });
+};
+
+
 api.prototype.CreatePlatform = function (group, x, y) {
     $blast.appendCode('once', 'createPlatform', {
         group: group,

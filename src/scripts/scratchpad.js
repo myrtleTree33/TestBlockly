@@ -29,6 +29,7 @@ console.log("[ BLAST framework loaded ]");
 //
 //api.Echo('hello world!');
 api.CreateSky();
+api.CreateTiledBackground('rock', 2000,2000);
 api.SetGameSize(2000, 2000);
 ////api.CreatePlatform('terrain2', 0, 500);
 //api.CreateTilePlatform('terrain2', 50, 200, 200, 50);

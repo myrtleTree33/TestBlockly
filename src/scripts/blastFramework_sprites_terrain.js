@@ -115,7 +115,40 @@ __generators.sky = function (name) {
 };
 
 
-__generators.platform = function (group, x,y) {
+__generators.tiledBackground = function (type, width, height) {
+    var nativeObject = __generators.SimpleSprite(name);
+    var type = type;
+    if (type === 'sand') {
+        type = 'textureSand';
+
+    } else if (type === 'rock') {
+        type = 'textureRock';
+
+    } else {
+        type = 'textureSand' // default
+    }
+
+    var init = function () {
+        var target = $blast._game.add.tileSprite(0, 0, width, height, type, 2);
+        target = $blast._groups['background'].add(target);
+        this.obj = target;
+        nativeObject._init(this);
+        console.debug("Init tiled background.");
+    };
+
+    var kill = function () {
+        nativeObject._kill();
+    };
+
+    return _.extend({}, nativeObject, {
+        init: init,
+        kill: kill
+    });
+}
+;
+
+
+__generators.platform = function (group, x, y) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
@@ -140,7 +173,7 @@ __generators.platform = function (group, x,y) {
 };
 
 
-__generators.tilePlatform = function (group, x,y, width, height) {
+__generators.tilePlatform = function (group, x, y, width, height) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
@@ -166,7 +199,7 @@ __generators.tilePlatform = function (group, x,y, width, height) {
 };
 
 
-__generators.rock = function (group, name, x,y, gravity) {
+__generators.rock = function (group, name, x, y, gravity) {
     //var nativeObject = __generators.SimpleSprite('rock1');
     var nativeObject = __generators.SimpleSprite(name);
 
@@ -184,7 +217,7 @@ __generators.rock = function (group, name, x,y, gravity) {
 
     var kill = function () {
         console.log("=KILL= I got called");
-        __generators.explosion(this.obj.x,this.obj.y);
+        __generators.explosion(this.obj.x, this.obj.y);
         this.obj.destroy();
         nativeObject._kill();
     };
@@ -196,13 +229,13 @@ __generators.rock = function (group, name, x,y, gravity) {
 };
 
 
-__generators.explosion = function(x,y) {
-    var explosion = $blast._game.add.sprite(x, y,'explosion');
-    explosion.anchor.setTo(0.5,0.5);
+__generators.explosion = function (x, y) {
+    var explosion = $blast._game.add.sprite(x, y, 'explosion');
+    explosion.anchor.setTo(0.5, 0.5);
     var anim = explosion.animations.add('explode', null, 60, false);
     anim.killOnComplete = true;
     anim.play('explode');
-    anim.onComplete.add(function() {
+    anim.onComplete.add(function () {
         console.log('Explosion at (' + x + ',' + y + ')');
         explosion.kill();
     });
@@ -215,7 +248,7 @@ __generators.explosion = function(x,y) {
 // these should be included in the collision manager
 
 
-__generators.tree = function (group, name, x,y, gravity) {
+__generators.tree = function (group, name, x, y, gravity) {
     var nativeObject = __generators.SimpleSprite(name);
 
     var init = function () {
@@ -234,7 +267,7 @@ __generators.tree = function (group, name, x,y, gravity) {
 
     var kill = function () {
         console.log("=KILL= I got called");
-        __generators.explosion(this.obj.x,this.obj.y);
+        __generators.explosion(this.obj.x, this.obj.y);
         this.obj.destroy();
         nativeObject._kill();
     };
@@ -246,7 +279,7 @@ __generators.tree = function (group, name, x,y, gravity) {
 };
 
 
-__generators.bullet = function (x,y, gravity, xVel, yVel) {
+__generators.bullet = function (x, y, gravity, xVel, yVel) {
     var nativeObject = __generators.SimpleSprite();
 
     var init = function () {
@@ -257,26 +290,26 @@ __generators.bullet = function (x,y, gravity, xVel, yVel) {
         bullet.body.gravity.y = gravity;
         bullet.body.bounce.y = 0.7 + Math.random() * 0.2;
         bullet.outOfBoundsKill = true;
-        bullet.anchor.setTo(0.5,0);
+        bullet.anchor.setTo(0.5, 0);
         bullet.checkWorldBounds = true;
-        bullet.update = function() {
+        bullet.update = function () {
             var vel = bullet.body.velocity;
-            bullet.angle = - Math.atan2(vel.x,vel.y)/(Math.PI/180) + 180;
+            bullet.angle = -Math.atan2(vel.x, vel.y) / (Math.PI / 180) + 180;
         };
         this.obj = bullet; // add to object
         nativeObject._init(this);
-        console.debug('Init bullet at (' + x + ',' + y + '),' + 'vel=(' + xVel + ',' + yVel + ')' );
-        bullet.events.onOutOfBounds.add(function() {
+        console.debug('Init bullet at (' + x + ',' + y + '),' + 'vel=(' + xVel + ',' + yVel + ')');
+        bullet.events.onOutOfBounds.add(function () {
             console.log(bullet.name);
             $blast.deregisterObject(bullet.name);
-            console.log ("OUT OF SCREEN");
+            console.log("OUT OF SCREEN");
         }, bullet);
 
     };
 
     var kill = function () {
         console.log("=KILL= I got called");
-        __generators.explosion(this.obj.x,this.obj.y);
+        __generators.explosion(this.obj.x, this.obj.y);
         this.obj.destroy();
         nativeObject._kill();
     };
@@ -301,8 +334,8 @@ __generators.player = function (group, name, x, y, gravity) {
         player.body.bounce.y = 0.2;
         player.outOfBoundsKill = true;
         player.body.collideWorldBounds = true;
-        player.animations.add('left', [0,1,2,3], 10, true);
-        player.animations.add('right', [5,6,7,8], 10, true);
+        player.animations.add('left', [0, 1, 2, 3], 10, true);
+        player.animations.add('right', [5, 6, 7, 8], 10, true);
         this.obj = player; // add to object
         nativeObject._init(this);
         console.debug("Init player at x=" + x + ',' + y);
@@ -310,31 +343,31 @@ __generators.player = function (group, name, x, y, gravity) {
 
     var kill = function () {
         console.log("John got removed??");
-        __generators.explosion(this.obj.x,this.obj.y);
+        __generators.explosion(this.obj.x, this.obj.y);
         this.obj.destroy();
         nativeObject._kill();
     };
 
 
-    var moveLeft = function() {
+    var moveLeft = function () {
         player.body.velocity.x = -150;
         player.animations.play('left');
     };
 
 
-    var moveRight = function() {
+    var moveRight = function () {
         player.body.velocity.x = 150;
         player.animations.play('right');
     };
 
 
-    var stop = function() {
+    var stop = function () {
         player.body.velocity.x = 0;
-      player.animations.stop();
+        player.animations.stop();
     };
 
 
-    var jump = function() {
+    var jump = function () {
         player.body.velocity.y = -350;
     };
 

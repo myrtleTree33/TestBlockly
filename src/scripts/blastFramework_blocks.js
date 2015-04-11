@@ -77,6 +77,19 @@ __blocks.createSky = function (opts) {
 };
 
 
+__blocks.createTiledBackground = function (opts) {
+    var opts = opts || {};
+    var width = opts.width || 200;
+    var height = opts.height || 200;
+    var type = opts.type || 'textureSand';
+    var code = 'var sprite = $blast.sprite.generators.tiledBackground('
+        + dumpStr(type) + ','
+        + width + ',' + height
+        + ').init();\n';
+    return code;
+};
+
+
 __blocks.createPlatform = function (opts) {
     var opts = opts || {};
     var group = opts.group || 'terrain1';
