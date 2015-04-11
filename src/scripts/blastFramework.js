@@ -46,7 +46,7 @@ var Blast = (function () {
             __._game.load.image('firstaid', 'images/assets/firstaid.png');
             __._game.load.image('textureRock', 'images/assets/textures/stoneCenter.png');
             __._game.load.image('textureSand', 'images/assets/textures/sandCenter.png');
-            __._game.load.spritesheet('textureMapBrick', 'images/assets/textures/brick_tiles_1.png',32,32);
+            __._game.load.spritesheet('textureMapBrick', 'images/assets/textures/brick_tiles_1.png', 32, 32);
             __._game.load.spritesheet('dude', 'images/assets/dude.png', 32, 48);
             __._game.load.spritesheet('explosion', 'images/assets/explosions/explosion1.png', 128, 128);
 
@@ -79,12 +79,24 @@ var Blast = (function () {
             __._groups.bullet.enableBody = true;
 
             // send state reporting every 0.1 sec
-            setInterval(function() {
+            setInterval(function () {
                 var statesStr = JSON.stringify($blast.dumpState());
-                    if (hasAndroid) {
-                        Android.makeSpriteStates(statesStr);
-                    }
+                if (hasAndroid) {
+                    Android.makeSpriteStates(statesStr);
+                }
             }, 200);
+
+            console.log("-----------------------");
+            _bindHammer();
+
+
+            // tap events
+            __._game.input.onTap.add(_inputManager.onTap);
+            __._game.input.onDown.add(_inputManager.onDown);
+            __._game.input.onUp.add(_inputManager.onUp);
+            __._game.input.onHold.add(_inputManager.onHold);
+
+
         },
         onUpdate: function () {
             var __ = $blast;
@@ -120,13 +132,76 @@ var Blast = (function () {
             __._game.physics.arcade.collide(__._groups.terrain2, __._groups.enemy3);
 
             /** Bullet **/
-            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.destructibles);
-            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain1);
-            //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain2);
-            __._game.physics.arcade.collide(__._groups.destructibles, __._groups.bullet, _collisionManager,null,this);
-            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.bullet, _collisionManager,null, this);
-            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.bullet, _collisionManager,null, this);
+                //__._game.physics.arcade.collide(__._groups.bullet, __._groups.destructibles);
+                //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain1);
+                //__._game.physics.arcade.collide(__._groups.bullet, __._groups.terrain2);
+            __._game.physics.arcade.collide(__._groups.destructibles, __._groups.bullet, _collisionManager, null, this);
+            __._game.physics.arcade.collide(__._groups.terrain1, __._groups.bullet, _collisionManager, null, this);
+            __._game.physics.arcade.collide(__._groups.terrain2, __._groups.bullet, _collisionManager, null, this);
 
+        }
+    };
+
+    // for swiping features
+    var _bindHammer = function () {
+        var ele = document.getElementsByTagName('body')[0];
+        var hammertime = Hammer(ele);
+
+        hammertime.on('swipeup', function (event) {
+            _inputManager.onSwipe('up');
+        });
+
+        hammertime.on('swipedown', function (event) {
+            _inputManager.onSwipe('down');
+        });
+
+        hammertime.on('swipeleft', function (event) {
+            _inputManager.onSwipe('left');
+        });
+
+        hammertime.on('swiperight', function (event) {
+            _inputManager.onSwipe('right');
+        });
+
+        console.log('--- Attached Hammer.JS ---');
+    };
+
+
+    // Central input manager, sends input events to browser
+    var _inputManager = {
+        onTap: function (pointer) {
+            console.log('Tapped: ' + pointer.x + ',' + pointer.y);
+            if (hasAndroid) {
+                Android.onTap(pointer.x, pointer.y);
+            }
+        },
+
+        onDown: function (pointer) {
+            console.log('onDown: ' + pointer.x + ',' + pointer.y);
+            if (hasAndroid) {
+                Android.onDown(pointer.x, pointer.y);
+            }
+        },
+
+        onUp: function (pointer) {
+            console.log('onUp: ' + pointer.x + ',' + pointer.y);
+            if (hasAndroid) {
+                Android.onUp(pointer.x, pointer.y);
+            }
+        },
+
+        onDrag: function (pointer) {
+            console.log('Dragged: ' + pointer.x + ',' + pointer.y);
+            if (hasAndroid) {
+                Android.onDrag(pointer.x, pointer.y);
+            }
+        },
+
+        onSwipe: function(direction) {
+            console.log(direction);
+            if (hasAndroid) {
+                Android.onSwipe(direction);
+            }
         }
     };
 
@@ -136,7 +211,7 @@ var Blast = (function () {
         var spriteA = _accumulator[nativePhaserSpriteA.name]
             , spriteB = _accumulator[nativePhaserSpriteB.name];
         console.log('Detected collision=(' + spriteA.name + ',' + spriteA.obj.group + ') ('
-                        + spriteB.name + ',' + spriteB.obj.group + ')');
+        + spriteB.name + ',' + spriteB.obj.group + ')');
 
         if (hasAndroid) {
             Android.onCollision(spriteA.name, spriteA.obj.group, spriteB.name, spriteB.obj.group);
@@ -144,7 +219,7 @@ var Blast = (function () {
 
         /** Warning: Deleting SpriteA will cause game to crash **/
         if (spriteB.obj.group === 'bullet') {
-            console.log ("BULLET");
+            console.log("BULLET");
             $blast.deregisterObject(spriteB.obj.name);
             //return;
         }
@@ -153,7 +228,7 @@ var Blast = (function () {
     }
 
 
-    var dumpState = function() {
+    var dumpState = function () {
         var retVal = [];
         if (!_accumulator) {
             return retVal;
@@ -221,14 +296,14 @@ var Blast = (function () {
 
     }
 
-    var getObject = function(name) {
+    var getObject = function (name) {
         var _name = name || '';
-        console.log ('i am here');
+        console.log('i am here');
         var target = _accumulator[_name];
         if (target) {
-            console.log ('Sprite retrieved: ' + _name);
+            console.log('Sprite retrieved: ' + _name);
         } else {
-            console.log ('Sprite retrieved: undefined');
+            console.log('Sprite retrieved: undefined');
         }
         return target;
     }

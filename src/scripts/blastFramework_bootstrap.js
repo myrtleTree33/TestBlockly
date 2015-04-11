@@ -12,4 +12,3 @@ var hasAndroid = function() {
 
 window.hasAndroid = hasAndroid;
 
-

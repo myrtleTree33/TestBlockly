@@ -1,33 +1,37 @@
 {
-  "name": "TestBlockly",
-  "version": "0.0.0",
-  "homepage": "https://github.com/myrtleTree33/TestBlockly",
-  "authors": [
-    "Joel Tong <me@joeltong.org>"
-  ],
-  "description": "Testbed for Blockly Phaser and AI2 integration",
-  "keywords": [
-    "html5",
-    "bower",
-    "phaser",
-    "App",
-    "Inventor",
-    "2"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "src/scripts/vendor",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "blockly": "https://github.com/google/blockly.git",
-    "phaser": "~2.2.2",
-    "lodash": "~3.3.1",
-    "node-uuid": "~1.4.2"
-  }
+    "name": "TestBlockly",
+    "version": "0.0.0",
+    "homepage": "https://github.com/myrtleTree33/TestBlockly",
+    "authors": [
+        "Joel Tong <me@joeltong.org>"
+    ],
+    "description": "Testbed for Blockly Phaser and AI2 integration",
+    "keywords": [
+        "html5",
+        "bower",
+        "phaser",
+        "App",
+        "Inventor",
+        "2"
+    ],
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "src/scripts/vendor",
+        "test",
+        "tests"
+    ],
+    "directory": "src/scripts/vendor",
+    "dependencies": {
+        "blockly": "https://github.com/google/blockly.git",
+        "phaser": "~2.2.2",
+        "lodash": "~3.3.1",
+        "node-uuid": "~1.4.2"
+    },
+    "devDependencies": {
+        "hammer.js": "~2.0.4"
+    }
 }

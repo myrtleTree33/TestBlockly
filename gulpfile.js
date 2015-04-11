@@ -43,10 +43,35 @@ gulp.task('images', function() {
     .pipe(gulp.dest('./dist/images'))
 });
 
-gulp.task('phaser', function() {
+gulp.task('hammer-js', function() {
+    return gulp.src('./src/scripts/vendor/hammer.js/hammer.min.js')
+        .pipe(gulp.dest('./dist/scripts'))
+});
+
+
+gulp.task('hammer-map', function() {
+    return gulp.src('./src/scripts/vendor/hammer.js/hammer.min.map')
+        .pipe(gulp.dest('./dist/scripts'))
+});
+
+
+gulp.task('phaser-js', function() {
     return gulp.src('./src/scripts/vendor/phaser/build/phaser.min.js')
         .pipe(gulp.dest('./dist/scripts'))
 });
+
+
+gulp.task('phaser-map', function() {
+    return gulp.src('./src/scripts/vendor/phaser/build/phaser.map')
+        .pipe(gulp.dest('./dist/scripts'))
+});
+
+//gulp.task('hammer', ['hammer-map', 'hammer-js']);
+//gulp.task('phaser', ['phaser-map', 'phaser-js']);
+
+gulp.task('hammer', ['hammer-js']);
+gulp.task('phaser', ['phaser-js']);
+
 
 gulp.task('templates', function() {
   return gulp.src('src/*.jade')
@@ -57,7 +82,7 @@ gulp.task('templates', function() {
     .pipe( gulp.dest('dist/') )
 });
 
-gulp.task('build', ['compass', 'js', 'templates', 'images', 'phaser']);
+gulp.task('build', ['compass', 'js', 'templates', 'images', 'hammer', 'phaser']);
 
 gulp.task('serve', ['build', 'browser-sync'], function () {
   gulp.watch('src/stylesheets/*.scss',['compass', reload]);
