@@ -42,6 +42,16 @@ __blocks.setCameraPos = function (opts) {
 };
 
 
+__blocks.setCameraFollow = function (opts) {
+    var opts = opts || {}
+        , name = opts.name || ''
+        , code = '__actions.setCameraFollow('
+            + dumpStr(name)
+            + ');' + '\n';
+    return code;
+};
+
+
 __blocks.createSimpleSprite = function (opts) {
     var opts = opts || {};
     var name = opts.name || '';

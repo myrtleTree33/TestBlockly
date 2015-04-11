@@ -97,3 +97,14 @@ __actions.setCameraPos = function (x, y) {
     $blast._game.camera.y = y;
 };
 
+
+__actions.setCameraFollow = function (name) {
+    var spriteObj = $blast.getObject(name).obj;
+    if (!spriteObj) {
+        console.err('Oops.  No such obj for camera to follow.');
+        return null;
+    }
+
+    $blast._game.camera.follow(spriteObj, Phaser.Camera.FOLLOW_LOCKON);
+};
+

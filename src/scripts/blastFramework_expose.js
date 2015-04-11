@@ -25,6 +25,13 @@ api.prototype.SetCameraPos = function(x,y) {
 };
 
 
+api.prototype.SetCameraFollow = function(name) {
+    $blast.appendCode('once', 'setCameraFollow', {
+        name: name
+    });
+};
+
+
 api.prototype.Echo = function (message) {
     $blast.appendCode('once', 'log', {
         message: message
