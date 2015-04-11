@@ -165,8 +165,8 @@ var Blast = (function () {
                     name: key,
                     x: obj.x,
                     y: obj.y,
-                    velX: obj.body.velocity.x,
-                    velY: obj.body.velocity.y
+                    velX: obj.body ? obj.body.velocity.x : 0, // if no physics, ignore
+                    velY: obj.body ? obj.body.velocity.y : 0
                 }
                 retVal.push(state);
             }

@@ -8,6 +8,23 @@ var api = function () {
 };
 
 
+api.prototype.SetGameSize = function(width, height) {
+    $blast.appendCode('once', 'setGameSize', {
+        width: width,
+        height: height
+    });
+
+};
+
+
+api.prototype.SetCameraPos = function(x,y) {
+    $blast.appendCode('once', 'setCameraPos', {
+        x: x,
+        y: y
+    });
+};
+
+
 api.prototype.Echo = function (message) {
     $blast.appendCode('once', 'log', {
         message: message
@@ -18,7 +35,7 @@ api.prototype.Echo = function (message) {
 
 
 api.prototype.CreateSky = function () {
-    $blast.appendCode('onCreate', 'createSky', {
+    $blast.appendCode('once', 'createSky', {
         name: 'sky'
     });
 };
@@ -34,7 +51,7 @@ api.prototype.CreatePlatform = function (group, x, y) {
 
 
 api.prototype.CreateTilePlatform = function (group, x, y, width, height) {
-    $blast.appendCode('onCreate', 'createTilePlatform', {
+    $blast.appendCode('once', 'createTilePlatform', {
         group: group,
         x: x,
         y: y,
@@ -185,7 +202,6 @@ api.prototype.GetSpriteVelX = function(uuidStr, name) {
 api.prototype.SetSpriteVelX = function(name, velX) {
     __actions.setSpriteProp(name, 'velX', velX || 0);
 };
-
 
 
 if (typeof window !== 'undefined') {

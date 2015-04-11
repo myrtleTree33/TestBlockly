@@ -15,6 +15,32 @@ __blocks.log = function (opts) {
 
 };
 
+var dumpStr = function (rawString) {
+    return '\'' + rawString + '\'';
+};
+
+
+__blocks.setGameSize = function (opts) {
+    var opts = opts || {}
+        , width = opts.width || 0
+        , height = opts.height || 0
+        , code = '__actions.setGameScale('
+            + width + ',' + height
+            + ');' + '\n';
+    return code;
+};
+
+
+__blocks.setCameraPos = function (opts) {
+    var opts = opts || {}
+        , x = opts.x || 0
+        , y = opts.y || 0
+        , code = '__actions.setCameraPos('
+            + x + ',' + y
+            + ');' + '\n';
+    return code;
+};
+
 
 __blocks.createSimpleSprite = function (opts) {
     var opts = opts || {};
@@ -59,9 +85,9 @@ __blocks.createTilePlatform = function (opts) {
     var width = opts.width || 20;
     var height = opts.height || 20;
     var code = 'var sprite = $blast.sprite.generators.tilePlatform(\'' + group
-            + '\',' + x + ',' + y
-            + ',' + width + ',' + height
-            +  ').init();\n';
+        + '\',' + x + ',' + y
+        + ',' + width + ',' + height
+        + ').init();\n';
     return code;
 };
 
@@ -147,6 +173,7 @@ __blocks.setState = function (opts) {
     var code = '$blast.getObject(' + '\'' + name + '\').' + state + '();';
     return code;
 };
+
 
 
 

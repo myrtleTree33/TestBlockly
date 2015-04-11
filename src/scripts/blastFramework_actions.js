@@ -80,3 +80,20 @@ __actions.setSpriteProp = function (name, property, value) {
     }
 };
 
+
+__actions.setGameScale = function (width, height) {
+    var width = width || 0
+        , height = height || 0;
+    $blast._game.world.setBounds(0, 0, width, height);
+    console.log('Game size changed=' + width + ',' + height);
+};
+
+
+__actions.setCameraPos = function (x, y) {
+    var x = x || 0
+        , y = y || 0;
+
+    $blast._game.camera.x = x;
+    $blast._game.camera.y = y;
+};
+
