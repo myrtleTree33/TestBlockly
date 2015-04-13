@@ -28,15 +28,15 @@ console.log("[ BLAST framework loaded ]");
  */
 //
 //api.Echo('hello world!');
-api.CreateSky();
-api.CreateTiledBackground('rock', 2000,2000);
-api.SetGameSize(2000, 2000);
+//api.CreateSky();
+//api.CreateTiledBackground('rock', 2000,2000);
+//api.SetGameSize(2000, 2000);
 ////api.CreatePlatform('terrain2', 0, 500);
 //api.CreateTilePlatform('terrain2', 50, 200, 200, 50);
 //api.CreateTilePlatform('terrain1', 0, 500, 400, 50);
-api.CreateRock('terrain2', 'rock1', 900,0,70);
-api.CreateRock('terrain2', 'rock2', 50,0,70);
-api.SetCameraFollow('rock1');
+//api.CreateRock('terrain2', 'rock1', 900,0,70);
+//api.CreateRock('terrain2', 'rock2', 50,0,70);
+//api.SetCameraFollow('rock1');
 //api.CreateTree('terrain1', 'myTree', 50, 0, 900);
 //api.CreateBullet(250, 20, 20, 0, 90);
 //api.CreatePlayer('player1', 'john', 70, 0, 200);
@@ -61,7 +61,7 @@ api.SetCameraFollow('rock1');
 //}, 2000);
 //
 //
-api.GenerateGame();
+//api.GenerateGame();
 /*
 setTimeout(function () {
 //    console.log("TRIGGERED==========");

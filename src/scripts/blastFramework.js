@@ -163,6 +163,9 @@ var Blast = (function () {
             _inputManager.onSwipe('right');
         });
 
+        hammertime.on('swipe', function (event) {
+            _inputManager.onSwipe('swipe');
+        });
         console.log('--- Attached Hammer.JS ---');
     };
 
@@ -172,28 +175,28 @@ var Blast = (function () {
         onTap: function (pointer) {
             console.log('Tapped: ' + pointer.x + ',' + pointer.y);
             if (hasAndroid) {
-                Android.onTap(pointer.x, pointer.y);
+                Android.onTouch("tap", pointer.x, pointer.y);
             }
         },
 
         onDown: function (pointer) {
             console.log('onDown: ' + pointer.x + ',' + pointer.y);
             if (hasAndroid) {
-                Android.onDown(pointer.x, pointer.y);
+                Android.onTouch("down", pointer.x, pointer.y);
             }
         },
 
         onUp: function (pointer) {
             console.log('onUp: ' + pointer.x + ',' + pointer.y);
             if (hasAndroid) {
-                Android.onUp(pointer.x, pointer.y);
+                Android.onTouch("up", pointer.x, pointer.y);
             }
         },
 
         onDrag: function (pointer) {
             console.log('Dragged: ' + pointer.x + ',' + pointer.y);
             if (hasAndroid) {
-                Android.onDrag(pointer.x, pointer.y);
+                Android.onTouch("drag", pointer.x, pointer.y);
             }
         },
 
