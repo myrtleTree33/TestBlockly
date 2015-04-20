@@ -9,9 +9,18 @@ Ensure that `nodejs` and `bower` is installed.  Then run
 
     $ bower install
     
+
+## Development
+
+SimplePhaser uses GulpJS, which requires NodeJS and Gulp.
+
+    $ npm install -g gulp
+    $ gulp serve
+
+    
 ## Deployment
 
-Run HTML files in a HTTP server.  To do so,
+SimplePhaser is hosted on AppEngine.  To deploy, ensure you have 
+the AppEngine Python SDK.  Then run:
 
-    $ cd src/ && python -m SimpleHTTPServer 3000
-
+    $ <Path to App Engine SDK>/appcfg.py update .
