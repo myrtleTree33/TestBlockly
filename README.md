@@ -20,7 +20,7 @@ SimplePhaser uses GulpJS, which requires NodeJS and Gulp.
     
 ## Deployment
 
-SimplePhaser is hosted on AppEngine.  To deploy, ensure you have 
-the AppEngine Python SDK.  Then run:
+SimplePhaser is hosted on AppEngine, at http://ai2-simplephaser.appspot.com/ .  
+To deploy, ensure you have the AppEngine Python SDK.  Then run:
 
     $ <Path to App Engine SDK>/appcfg.py update .
