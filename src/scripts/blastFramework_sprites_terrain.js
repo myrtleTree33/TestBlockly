@@ -350,13 +350,13 @@ __generators.player = function (group, name, x, y, gravity) {
 
 
     var moveLeft = function () {
-        player.body.velocity.x = -150;
+        //player.body.velocity.x = -150;
         player.animations.play('left');
     };
 
 
     var moveRight = function () {
-        player.body.velocity.x = 150;
+        //player.body.velocity.x = 150;
         player.animations.play('right');
     };
 
