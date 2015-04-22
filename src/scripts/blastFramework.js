@@ -89,12 +89,11 @@ var Blast = (function () {
             console.log("-----------------------");
             _bindHammer();
 
-
             // tap events
-            __._game.input.onTap.add(_inputManager.onTap);
+            __._game.input.onTap.add(_inputManager._onTap);
             __._game.input.onDown.add(_inputManager.onDown);
             __._game.input.onUp.add(_inputManager.onUp);
-            __._game.input.onHold.add(_inputManager.onHold);
+            //__._game.input.onHold.add(_inputManager.onHold);
 
 
         },
@@ -145,7 +144,22 @@ var Blast = (function () {
     // for swiping features
     var _bindHammer = function () {
         var ele = document.getElementsByTagName('body')[0];
-        var hammertime = Hammer(ele);
+        var hammertime = new Hammer.Manager(ele, {
+            recognizers: [
+                [Hammer.Swipe, { direction: Hammer.DIRECTION_ALL }]
+            ]
+        });
+
+        var singleTap = new Hammer.Tap({ event: 'tap' });
+        var doubleTap = new Hammer.Tap({event: 'doubletap', taps: 2 });
+
+        hammertime.add([doubleTap, singleTap]);
+
+        doubleTap.recognizeWith(singleTap);
+        singleTap.requireFailure([doubleTap]);
+
+
+        //hammertime.get('tap').requireFailure('doubleTap');
 
         hammertime.on('swipeup', function (event) {
             _inputManager.onSwipe('up');
@@ -163,20 +177,57 @@ var Blast = (function () {
             _inputManager.onSwipe('right');
         });
 
+        hammertime.on('tap', function (event) {
+            _inputManager.onTap();
+        });
+
+        hammertime.on('doubletap', function (event) {
+            _inputManager.onDoubleTap();
+        });
+
         hammertime.on('swipe', function (event) {
             _inputManager.onSwipe('swipe');
         });
         console.log('--- Attached Hammer.JS ---');
     };
 
+    var _cache = {
+        pointer: {
+            x: 0,
+            y: 0
+        },
+    };
 
     // Central input manager, sends input events to browser
     var _inputManager = {
-        onTap: function (pointer) {
-            console.log('Tapped: ' + pointer.x + ',' + pointer.y);
-            if (hasAndroid) {
-                Android.onTouch("tap", pointer.x, pointer.y);
-            }
+
+        _onTap: function (pointer) {
+            _cache.pointer = {
+                x: pointer.x,
+                y: pointer.y
+            };
+        },
+
+        onTap: function () {
+            setTimeout(function() {
+                var x = _cache.pointer.x
+                    , y = _cache.pointer.y;
+                console.log('Tapped: ' + x + ',' + y);
+                if (hasAndroid) {
+                    Android.onTouch("tap", x, y);
+                }
+            }, 5);
+        },
+
+        onDoubleTap: function () {
+            setTimeout(function() {
+                var x = _cache.pointer.x
+                    , y = _cache.pointer.y;
+                console.log('Doubletap: ' + x + ',' + y);
+                if (hasAndroid) {
+                    Android.onTouch("doubletap", x, y);
+                }
+            }, 5);
         },
 
         onDown: function (pointer) {
@@ -200,7 +251,7 @@ var Blast = (function () {
             }
         },
 
-        onSwipe: function(direction) {
+        onSwipe: function (direction) {
             console.log(direction);
             if (hasAndroid) {
                 Android.onSwipe(direction);
